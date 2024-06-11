@@ -1,1 +1,1 @@
-export { default as Button } from "./Featurable";
+export { default as ReactGoogleReviews } from "./ReactGoogleReviews";
