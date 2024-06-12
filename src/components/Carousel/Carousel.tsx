@@ -115,7 +115,7 @@ export const Carousel: FC<{
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    // className={styles.btnIcon}
+                    className="carousel__btn__icon"
                 >
                     <path
                         strokeLinecap="round"
@@ -142,8 +142,7 @@ export const Carousel: FC<{
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    // @ts-ignore
-                    // className={styles.btnIcon}
+                    className="carousel__btn__icon"
                 >
                     <path
                         strokeLinecap="round"

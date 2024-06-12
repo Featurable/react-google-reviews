@@ -8,15 +8,12 @@ import {
     ReviewVariant,
     Theme,
 } from "../../types/review";
-// import * as styles from "../css/ReviewCard.module.css";
-// import { displayName } from "../utils/displayName";
-// import { getRelativeDate } from "../utils/getRelativeDate";
 import { displayName } from "../../utils/displayName";
 import { getRelativeDate } from "../../utils/getRelativeDate";
 import { trim } from "../../utils/trim";
-// import { GoogleIcon } from "./GoogleIcon";
-// import { GoogleLogo } from "./GoogleLogo";
-// import { StarRating } from "./StarRating";
+import { GoogleIcon } from "../Google/GoogleIcon";
+import { GoogleLogo } from "../Google/GoogleLogo";
+import { StarRating } from "../StarRating/StarRating";
 
 export const ReviewCard: FC<{
     review: GoogleReview;
@@ -27,8 +24,6 @@ export const ReviewCard: FC<{
     reviewVariant: ReviewVariant;
     size?: "sm" | "md" | "lg" | "xl";
     theme?: Theme;
-    commentOverride?: React.ReactNode;
-    // highlights?: WidgetHighlight[];
 }> = ({
     review,
     maxCharacters,
@@ -38,8 +33,6 @@ export const ReviewCard: FC<{
     reviewVariant,
     size = "md",
     theme = "light",
-    commentOverride,
-    // highlights = [],
 }) => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -57,22 +50,15 @@ export const ReviewCard: FC<{
 
     return (
         <div
-            className={clsx()
-            // @ts-ignore
-            // size === "sm" && styles["reviewCardSm"],
-            // // @ts-ignore
-            // size === "md" && styles["reviewCardMd"],
-            // // @ts-ignore
-            // size === "lg" && styles["reviewCardLg"],
-            // // @ts-ignore
-            // size === "xl" && styles["reviewCardXl"],
-            // // @ts-ignore
-            // theme === "light" && styles["reviewCardLight"],
-            // // @ts-ignore
-            // theme === "dark" && styles["reviewCardDark"],
-            // // @ts-ignore
-            // styles["reviewCard"]
-            }
+            className={clsx(
+                "reviewCard",
+                size === "sm" && "reviewCard--sm",
+                size === "md" && "reviewCard--md",
+                size === "lg" && "reviewCard--lg",
+                size === "xl" && "reviewCard--xl",
+                theme === "light" && "reviewCard--light",
+                theme === "dark" && "reviewCard--dark"
+            )}
         >
             <div>
                 {reviewVariant === "card" && (
@@ -87,66 +73,45 @@ export const ReviewCard: FC<{
 
                 {reviewVariant === "testimonial" && (
                     <div
-                        className={clsx()
-                        // @ts-ignore
-                        // size === "lg" && styles["starsLg"],
-                        // @ts-ignore
-                        // size === "xl" && styles["starsXl"]
-                        }
+                        className={clsx(
+                            size === "lg" && "stars--lg",
+                            size === "xl" && "stars--xl"
+                        )}
                     >
-                        {/* <StarRating
+                        <StarRating
                             rating={review.starRating}
                             size={size}
-                        /> */}
+                        />
                     </div>
                 )}
 
                 <div
-                    className={clsx()
-                    // reviewVariant === "card" &&
-                    //     // @ts-ignore
-                    //     styles["reviewBodyContainerCard"],
-                    // reviewVariant === "testimonial" &&
-                    //     size === "sm" &&
-                    //     // @ts-ignore
-                    //     styles[
-                    //         "reviewBodyContainerTestimonialSm"
-                    //     ],
-                    // reviewVariant === "testimonial" &&
-                    //     size === "md" &&
-                    //     // @ts-ignore
-                    //     styles[
-                    //         "reviewBodyContainerTestimonialMd"
-                    //     ],
-                    // reviewVariant === "testimonial" &&
-                    //     size === "lg" &&
-                    //     // @ts-ignore
-                    //     styles[
-                    //         "reviewBodyContainerTestimonialLg"
-                    //     ],
-                    // reviewVariant === "testimonial" &&
-                    //     size === "xl" &&
-                    //     // @ts-ignore
-                    //     styles["reviewBodyContainerTestimonialXl"]
-                    }
+                    className={clsx(
+                        reviewVariant === "card" &&
+                            "reviewBody__container--card",
+                        reviewVariant === "testimonial" &&
+                            size === "sm" &&
+                            "reviewBody__container--testimonial--sm",
+                        reviewVariant === "testimonial" &&
+                            size === "md" &&
+                            "reviewBody__container--testimonial--md",
+                        reviewVariant === "testimonial" &&
+                            size === "lg" &&
+                            "reviewBody__container--testimonial--lg",
+                        reviewVariant === "testimonial" &&
+                            size === "xl" &&
+                            "reviewBody__container--testimonial--xl"
+                    )}
                 >
                     <p
-                        className={clsx()
-                        // // @ts-ignore
-                        // size === "sm" && styles["reviewBodySm"],
-                        // // @ts-ignore
-                        // size === "md" && styles["reviewBodyMd"],
-                        // // @ts-ignore
-                        // size === "lg" && styles["reviewBodyLg"],
-                        // // @ts-ignore
-                        // size === "xl" && styles["reviewBodyXl"],
-                        // theme === "light" &&
-                        //     // @ts-ignore
-                        //     styles["reviewBodyLight"],
-                        // theme === "dark" &&
-                        //     // @ts-ignore
-                        //     styles["reviewBodyDark"]
-                        }
+                        className={clsx(
+                            size === "sm" && "reviewBody--sm",
+                            size === "md" && "reviewBody--md",
+                            size === "lg" && "reviewBody--lg",
+                            size === "xl" && "reviewBody--xl",
+                            theme === "light" && "reviewBody--light",
+                            theme === "dark" && "reviewBody--dark"
+                        )}
                         data-review-comment
                         data-review-id={review.reviewId}
                     >
@@ -156,25 +121,16 @@ export const ReviewCard: FC<{
                     {hasMore && (
                         <button
                             onClick={() => setIsOpen(!isOpen)}
-                            className={clsx()
-                            // // @ts-ignore
-                            // styles["readMore"],
-                            // // @ts-ignore
-                            // size === "sm" && styles["readMoreSm"],
-                            // // @ts-ignore
-                            // size === "md" && styles["readMoreMd"],
-                            // // @ts-ignore
-                            // size === "lg" && styles["readMoreLg"],
-                            // // @ts-ignore
-                            // size === "xl" && styles["readMoreXl"],
-                            // // @ts-ignore
-                            // theme === "light" &&
-                            //     // @ts-ignore
-                            //     styles["readMoreLight"],
-                            // theme === "dark" &&
-                            //     // @ts-ignore
-                            //     styles["readMoreDark"]
-                            }
+                            className={clsx(
+                                "readMore",
+                                size === "sm" && "readMore--sm",
+                                size === "md" && "readMore--md",
+                                size === "lg" && "readMore--lg",
+                                size === "xl" && "readMore--xl",
+                                theme === "light" &&
+                                    "readMore--light",
+                                theme === "dark" && "readMore--dark"
+                            )}
                         >
                             Read {isOpen ? "less" : "more"}
                         </button>
@@ -183,23 +139,19 @@ export const ReviewCard: FC<{
             </div>
 
             <div
-                className={clsx()
-                // // @ts-ignore
-                // styles["footer"],
-                // // @ts-ignore
-                // size === "md" && styles["footerMd"],
-                // // @ts-ignore
-                // size === "lg" && styles["footerLg"],
-                // // @ts-ignore
-                // size === "xl" && styles["footerXl"]
-                }
+                className={clsx(
+                    "footer",
+                    size === "md" && "footer--md",
+                    size === "lg" && "footer--lg",
+                    size === "xl" && "footer--xl"
+                )}
             >
-                {/* {reviewVariant === "card" && (
+                {reviewVariant === "card" && (
                     <StarRating
                         rating={review.starRating}
                         size={size}
                     />
-                )} */}
+                )}
 
                 {reviewVariant === "testimonial" && (
                     <ReviewCardReviewer
@@ -211,42 +163,34 @@ export const ReviewCard: FC<{
                     />
                 )}
 
-                {/* {logoVariant === "full" && (
+                {logoVariant === "full" && (
                     <GoogleLogo
                         className={clsx(
-                            // @ts-ignore
-                            size === "sm" && styles["logoSm"],
-                            // @ts-ignore
-                            size === "md" && styles["logoMd"],
-                            // @ts-ignore
-                            size === "lg" && styles["logoLg"],
-                            // @ts-ignore
-                            size === "xl" && styles["logoXl"]
+                            size === "sm" && "logo--sm",
+                            size === "md" && "logo--md",
+                            size === "lg" && "logo--lg",
+                            size === "xl" && "logo--xl"
                         )}
                     />
-                )} */}
-                {/* {logoVariant === "icon" && (
+                )}
+                {logoVariant === "icon" && (
                     <GoogleIcon
                         className={clsx(
                             reviewVariant &&
                                 size === "sm" &&
-                                // @ts-ignore
-                                styles["iconSm"],
+                                "icon--sm",
                             reviewVariant &&
                                 size === "md" &&
-                                // @ts-ignore
-                                styles["iconMd"],
+                                "icon--md",
                             reviewVariant &&
                                 size === "lg" &&
-                                // @ts-ignore
-                                styles["iconLg"],
+                                "icon--lg",
                             reviewVariant &&
                                 size === "xl" &&
-                                // @ts-ignore
-                                styles["iconXl"]
+                                "icon--xl"
                         )}
                     />
-                )} */}
+                )}
             </div>
         </div>
     );
@@ -330,23 +274,15 @@ const ReviewCardReviewer: React.FC<{
     };
 
     return (
-        // @ts-ignore
-        <div
-        // className={styles["reviewer"]}
-        >
+        <div className="reviewer">
             <div
-                className={clsx()
-                // // @ts-ignore
-                // styles["reviewerContainer"],
-                // // @ts-ignore
-                // size === "sm" && styles["reviewerContainerSm"],
-                // // @ts-ignore
-                // size === "md" && styles["reviewerContainerMd"],
-                // // @ts-ignore
-                // size === "lg" && styles["reviewerContainerLg"],
-                // // @ts-ignore
-                // size === "xl" && styles["reviewerContainerXl"]
-                }
+                className={clsx(
+                    "reviewer__container",
+                    size === "sm" && "reviewer__container--sm",
+                    size === "md" && "reviewer__container--md",
+                    size === "lg" && "reviewer__container--lg",
+                    size === "xl" && "reviewer__container--xl"
+                )}
             >
                 <img
                     src={
@@ -357,34 +293,24 @@ const ReviewCardReviewer: React.FC<{
                     onError={(e) => {
                         setFallback(true);
                     }}
-                    className={clsx()
-                    // // @ts-ignore
-                    // styles["reviewerImg"],
-                    // // @ts-ignore
-                    // size === "sm" && styles["reviewerImgSm"],
-                    // // @ts-ignore
-                    // size === "md" && styles["reviewerImgMd"],
-                    // // @ts-ignore
-                    // size === "lg" && styles["reviewerImgLg"],
-                    // // @ts-ignore
-                    // size === "xl" && styles["reviewerImgXl"]
-                    }
+                    className={clsx(
+                        "reviewer__img",
+                        size === "sm" && "reviewer__img--sm",
+                        size === "md" && "reviewer__img--md",
+                        size === "lg" && "reviewer__img--lg",
+                        size === "xl" && "reviewer__img--xl"
+                    )}
                 />
 
                 {fallback && (
                     <div
-                        className={clsx()
-                        // // @ts-ignore
-                        // styles["fallback"],
-                        // // @ts-ignore
-                        // size === "sm" && styles["fallbackSm"],
-                        // // @ts-ignore
-                        // size === "md" && styles["fallbackMd"],
-                        // // @ts-ignore
-                        // size === "lg" && styles["fallbackLg"],
-                        // // @ts-ignore
-                        // size === "xl" && styles["fallbackXl"]
-                        }
+                        className={clsx(
+                            "fallback",
+                            size === "sm" && "fallback--sm",
+                            size === "md" && "fallback--md",
+                            size === "lg" && "fallback--lg",
+                            size === "xl" && "fallback--xl"
+                        )}
                         style={{
                             backgroundColor: getFallbackBgColor(
                                 review.reviewer.isAnonymous
@@ -401,23 +327,15 @@ const ReviewCardReviewer: React.FC<{
             </div>
             <div className="">
                 <p
-                    className={clsx()
-                    // // @ts-ignore
-                    // styles["reviewerName"],
-                    // // @ts-ignore
-                    // size === "sm" && styles["reviewerNameSm"],
-                    // // @ts-ignore
-                    // size === "md" && styles["reviewerNameMd"],
-                    // // @ts-ignore
-                    // size === "lg" && styles["reviewerNameLg"],
-                    // // @ts-ignore
-                    // size === "xl" && styles["reviewerNameXl"],
-                    // // @ts-ignore
-                    // // theme === "light" &&
-                    // //     styles["reviewerNameLight"],
-                    // // @ts-ignore
-                    // theme === "dark" && styles["reviewerNameDark"]
-                    }
+                    className={clsx(
+                        "reviewer__name",
+                        size === "sm" && "reviewer__name--sm",
+                        size === "md" && "reviewer__name--md",
+                        size === "lg" && "reviewer__name--lg",
+                        size === "xl" && "reviewer__name--xl",
+                        theme === "light" && "reviewer__name--light",
+                        theme === "dark" && "reviewer__name--dark"
+                    )}
                 >
                     {review.reviewer.isAnonymous
                         ? "Anonymous"
@@ -428,23 +346,15 @@ const ReviewCardReviewer: React.FC<{
                 </p>
                 {dateDisplay === "absolute" && (
                     <p
-                        className={clsx()
-                        // // @ts-ignore
-                        // size === "sm" && styles["reviewerDateSm"],
-                        // // @ts-ignore
-                        // size === "md" && styles["reviewerDateMd"],
-                        // // @ts-ignore
-                        // size === "lg" && styles["reviewerDateLg"],
-                        // // @ts-ignore
-                        // size === "xl" && styles["reviewerDateXl"],
-                        // // @ts-ignore
-                        // theme === "light" &&
-                        //     // @ts-ignore
-                        //     styles["reviewerDateLight"],
-                        // theme === "dark" &&
-                        //     // @ts-ignore
-                        //     styles["reviewerDateDark"]
-                        }
+                        className={clsx(
+                            size === "sm" && "reviewer__date--sm",
+                            size === "md" && "reviewer__date--md",
+                            size === "lg" && "reviewer__date--lg",
+                            size === "xl" && "reviewer__date--xl",
+                            theme === "light" &&
+                                "reviewer__date--light",
+                            theme === "dark" && "reviewer__date--dark"
+                        )}
                     >
                         {new Date(
                             review.updateTime
@@ -457,23 +367,15 @@ const ReviewCardReviewer: React.FC<{
                 )}
                 {dateDisplay === "relative" && (
                     <p
-                        className={clsx()
-                        // // @ts-ignore
-                        // size === "sm" && styles["reviewerDateSm"],
-                        // // @ts-ignore
-                        // size === "md" && styles["reviewerDateMd"],
-                        // // @ts-ignore
-                        // size === "lg" && styles["reviewerDateLg"],
-                        // // @ts-ignore
-                        // size === "xl" && styles["reviewerDateXl"],
-                        // // @ts-ignore
-                        // theme === "light" &&
-                        //     // @ts-ignore
-                        //     styles["reviewerDateLight"],
-                        // theme === "dark" &&
-                        //     // @ts-ignore
-                        //     styles["reviewerDateDark"]
-                        }
+                        className={clsx(
+                            size === "sm" && "reviewer__date--sm",
+                            size === "md" && "reviewer__date--md",
+                            size === "lg" && "reviewer__date--lg",
+                            size === "xl" && "reviewer__date--xl",
+                            theme === "light" &&
+                                "reviewer__date--light",
+                            theme === "dark" && "reviewer__date--dark"
+                        )}
                     >
                         {getRelativeDate(new Date(review.updateTime))}
                     </p>
