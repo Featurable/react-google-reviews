@@ -1,12 +1,119 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../css/index.css";
-// import { GoogleReview } from "../../types/review";
-import { GoogleReview } from "../../types/review";
+import {
+    DateDisplay,
+    FeaturableAPIResponse,
+    GoogleReview,
+    LogoVariant,
+    NameDisplay,
+    ReviewVariant,
+    Theme,
+} from "../../types/review";
 import { Carousel } from "../Carousel/Carousel";
 
-export interface ButtonProps {
-    label?: string;
+interface ReactGoogleReviewsBaseProps {
+    /**
+     * Layout of the reviews.
+     */
+    layout: "carousel" | "badge" | "custom";
+    /**
+     * How to display the reviewer's name.
+     */
+    nameDisplay?: NameDisplay;
+
+    /**
+     * How to display the Google logo
+     */
+    logoVariant?: LogoVariant;
+
+    /**
+     * When collapsed, the maximum number of characters to display in the review body.
+     */
+    maxCharacters?: number;
+
+    /**
+     * How to display the review date.
+     */
+    dateDisplay?: DateDisplay;
+
+    /**
+     * How to display the review.
+     */
+    reviewVariant?: ReviewVariant;
+
+    /**
+     * Theme of the carousel.
+     */
+    theme?: Theme;
 }
+
+interface ReactGoogleReviewsWithPlaceIdProps
+    extends ReactGoogleReviewsBaseProps {
+    /**
+     * If using Google Places API, use `dangerouslyFetchPlaceDetails` to get reviews server-side and pass them to the client.
+     * Note: the Places API limits the number of reviews to FIVE most recent reviews.
+     */
+    reviews: GoogleReview[];
+    featurableId?: never;
+}
+
+interface ReactGoogleReviewsWithFeaturableIdProps
+    extends ReactGoogleReviewsBaseProps {
+    reviews?: never;
+    /**
+     * If using Featurable API, pass the ID of the widget after setting it up in the dashboard.
+     * Using the free Featurable API allows for unlimited reviews.
+     * https://featurable.com/app/widgets
+     */
+    featurableId: string;
+}
+
+type ReactGooglereviewsBasePropsWithRequired =
+    ReactGoogleReviewsBaseProps &
+        (
+            | ReactGoogleReviewsWithPlaceIdProps
+            | ReactGoogleReviewsWithFeaturableIdProps
+        );
+
+type ReactGoogleReviewsCarouselProps =
+    ReactGooglereviewsBasePropsWithRequired & {
+        layout: "carousel";
+        /**
+         * Autoplay speed of the carousel in milliseconds.
+         */
+        carouselSpeed?: number;
+
+        /**
+         * Whether to autoplay the carousel.
+         */
+        carouselAutoplay?: boolean;
+
+        /**
+         * Maximum number of items to display at any one time.
+         */
+        maxItems?: number;
+    };
+
+type ReactGoogleReviewsBadgeProps =
+    ReactGooglereviewsBasePropsWithRequired & {
+        layout: "badge";
+        /**
+         * Google profile URL.
+         * This is automatically fetched when using the Featurable API.
+         */
+        profileUrl?: string;
+    };
+
+type ReactGoogleReviewsCustomProps =
+    ReactGooglereviewsBasePropsWithRequired & {
+        layout: "custom";
+        renderer: (reviews: GoogleReview[]) => React.ReactNode;
+    };
+
+type ReactGoogleReviewsProps =
+    | ReactGoogleReviewsCarouselProps
+    | ReactGoogleReviewsCustomProps
+    | ReactGoogleReviewsBadgeProps;
 
 export const EXAMPLE_REVIEWS: GoogleReview[] = [
     {
@@ -89,11 +196,69 @@ export const EXAMPLE_REVIEWS: GoogleReview[] = [
     },
 ];
 
-const ReactGoogleReviews = (props: ButtonProps) => {
+const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
+    ...props
+}) => {
+    const [reviews, setReviews] = useState<GoogleReview[]>(
+        props.reviews ?? []
+    );
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+    const [profileUrl, setProfileUrl] = useState<string | null>(null);
+    const [totalReviewCount, setTotalReviewCount] = useState<
+        number | null
+    >(null);
+    const [averageRating, setAverageRating] = useState<number | null>(
+        null
+    );
+
+    useEffect(() => {
+        if (props.featurableId) {
+            fetch(
+                `https://featurable.com/api/v1/widgets/${props.featurableId}`,
+                {
+                    method: "GET",
+                }
+            )
+                .then((res) => res.json())
+                .then((data: FeaturableAPIResponse) => {
+                    if (!data.success) {
+                        setError(true);
+                        return;
+                    }
+                    setReviews(data.reviews);
+                    setProfileUrl(data.profileUrl);
+                    setTotalReviewCount(data.totalReviewCount);
+                    setAverageRating(data.averageRating);
+                })
+                .catch((err) => setError(true))
+                .finally(() => setLoading(false));
+        }
+    }, [props.featurableId]);
+
     return (
-        <div className="testabc">
-            <h1 className="font-bold">React Google Reviews</h1>
-            <Carousel reviews={EXAMPLE_REVIEWS} />
+        <div className="">
+            <div>
+                {props.layout === "carousel" && (
+                    <Carousel
+                        reviews={EXAMPLE_REVIEWS}
+                        maxCharacters={props.maxCharacters}
+                        nameDisplay={props.nameDisplay}
+                        logoVariant={props.logoVariant}
+                        dateDisplay={props.dateDisplay}
+                        reviewVariant={props.reviewVariant}
+                        carouselSpeed={props.carouselSpeed}
+                        carouselAutoplay={props.carouselAutoplay}
+                        maxItems={props.maxItems}
+                        theme={props.theme}
+                    />
+                )}
+
+                {props.layout === "badge" && null}
+
+                {props.layout === "custom" &&
+                    props.renderer(EXAMPLE_REVIEWS)}
+            </div>
         </div>
     );
 };

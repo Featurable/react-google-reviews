@@ -29,49 +29,14 @@ import { ReviewCard } from "../ReviewCard/ReviewCard";
 export const Carousel: FC<{
     reviews: GoogleReview[];
 
-    /**
-     * When collapsed, the maximum number of characters to display in the review body.
-     */
     maxCharacters?: number;
-
-    /**
-     * How to display the reviewer's name.
-     */
     nameDisplay?: NameDisplay;
-
-    /**
-     * How to display the Google logo
-     */
     logoVariant?: LogoVariant;
-
-    /**
-     * How to display the review date.
-     */
     dateDisplay?: DateDisplay;
-
-    /**
-     * How to display the review.
-     */
     reviewVariant?: ReviewVariant;
-
-    /**
-     * Autoplay speed of the carousel in milliseconds.
-     */
     carouselSpeed?: number;
-
-    /**
-     * Whether to autoplay the carousel.
-     */
     carouselAutoplay?: boolean;
-
-    /**
-     * Maximum number of items to display at any one time.
-     */
     maxItems?: number;
-
-    /**
-     * Theme of the carousel.
-     */
     theme?: Theme;
 }> = ({
     reviews,
@@ -194,7 +159,7 @@ export const Carousel: FC<{
                     return (
                         <div
                             className="carousel__card"
-                            key={review.reviewId}
+                            key={review.reviewId ?? review.comment}
                         >
                             <ReviewCard
                                 review={review}

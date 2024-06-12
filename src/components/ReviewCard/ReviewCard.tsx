@@ -344,42 +344,38 @@ const ReviewCardReviewer: React.FC<{
                               nameDisplay
                           )}
                 </p>
-                {dateDisplay === "absolute" && (
-                    <p
-                        className={clsx(
-                            size === "sm" && "reviewer__date--sm",
-                            size === "md" && "reviewer__date--md",
-                            size === "lg" && "reviewer__date--lg",
-                            size === "xl" && "reviewer__date--xl",
-                            theme === "light" &&
-                                "reviewer__date--light",
-                            theme === "dark" && "reviewer__date--dark"
-                        )}
-                    >
-                        {new Date(
-                            review.updateTime
-                        ).toLocaleDateString(undefined, {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                        })}
-                    </p>
-                )}
-                {dateDisplay === "relative" && (
-                    <p
-                        className={clsx(
-                            size === "sm" && "reviewer__date--sm",
-                            size === "md" && "reviewer__date--md",
-                            size === "lg" && "reviewer__date--lg",
-                            size === "xl" && "reviewer__date--xl",
-                            theme === "light" &&
-                                "reviewer__date--light",
-                            theme === "dark" && "reviewer__date--dark"
-                        )}
-                    >
-                        {getRelativeDate(new Date(review.updateTime))}
-                    </p>
-                )}
+
+                {review.updateTime ||
+                    (review.createTime && (
+                        <p
+                            className={clsx(
+                                size === "sm" && "reviewer__date--sm",
+                                size === "md" && "reviewer__date--md",
+                                size === "lg" && "reviewer__date--lg",
+                                size === "xl" && "reviewer__date--xl",
+                                theme === "light" &&
+                                    "reviewer__date--light",
+                                theme === "dark" &&
+                                    "reviewer__date--dark"
+                            )}
+                        >
+                            {dateDisplay === "absolute"
+                                ? new Date(
+                                      review.updateTime ??
+                                          review.createTime
+                                  ).toLocaleDateString(undefined, {
+                                      year: "numeric",
+                                      month: "long",
+                                      day: "numeric",
+                                  })
+                                : getRelativeDate(
+                                      new Date(
+                                          review.updateTime ??
+                                              review.createTime
+                                      )
+                                  )}
+                        </p>
+                    ))}
             </div>
         </div>
     );

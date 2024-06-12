@@ -1,5 +1,5 @@
 export type GoogleReview = {
-    reviewId: string;
+    reviewId: string | null;
     reviewer: {
         profilePhotoUrl: string;
         displayName: string;
@@ -7,8 +7,8 @@ export type GoogleReview = {
     };
     starRating: number;
     comment: string;
-    createTime: string;
-    updateTime: string;
+    createTime: string | null;
+    updateTime: string | null;
     reviewReply?: {
         comment: string;
         updateTime: string;
@@ -27,3 +27,26 @@ export type DateDisplay = "relative" | "absolute" | "none";
 export type ReviewVariant = "testimonial" | "card";
 
 export type Theme = "light" | "dark";
+
+interface FeaturableAPIResponseBase {
+    success: boolean;
+}
+
+interface FeaturableAPIResponseSuccess
+    extends FeaturableAPIResponseBase {
+    success: true;
+    profileUrl: string | null;
+    batchSize: number;
+    totalReviewCount: number;
+    averageRating: number;
+    reviews: GoogleReview[];
+}
+
+interface FeaturableAPIResponseError
+    extends FeaturableAPIResponseBase {
+    success: false;
+}
+
+export type FeaturableAPIResponse =
+    | FeaturableAPIResponseSuccess
+    | FeaturableAPIResponseError;
