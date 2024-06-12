@@ -1,1 +1,3 @@
-export * from "./components";
+import "./css/index.css";
+
+export { ReactGoogleReviews } from "./components";

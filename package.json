@@ -1,23 +1,28 @@
 {
   "name": "react-google-reviews",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "scripts": {
     "rollup": "rollup -c --bundleConfigAsCjs"
   },
-  "author": "",
+  "author": "Ryan Chiang",
   "license": "ISC",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
     "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
     "@types/react-slick": "^0.23.13",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
+    "postcss-import": "^16.1.0",
     "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "rollup": "^4.18.0",
     "rollup-plugin-dts": "^6.1.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-serve": "^1.1.1",
     "tailwindcss": "^3.4.4",
@@ -26,12 +31,19 @@
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "style": "dist/esm/index.css",
   "files": [
     "dist"
   ],
   "types": "dist/index.d.ts",
+  "peerDependencies": {
+    "react": ">= 16.8 || 18.0.0",
+    "react-dom": ">= 16.8 || 18.0.0",
+    "@types/react": "^18.3.3"
+  },
   "dependencies": {
     "clsx": "^2.1.1",
-    "react-slick": "^0.30.2"
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1"
   }
 }

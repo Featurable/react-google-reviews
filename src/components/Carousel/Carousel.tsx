@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React from "react";
+import React, { useMemo } from "react";
 // import { GoogleReview } from "common/types/review.types";
 // import {
 //     WidgetConfig,
@@ -10,13 +10,12 @@ import React from "react";
 //     WidgetConfigTheme,
 //     WidgetHighlight,
 // } from "common/types/widget.types";
-import { FC, useMemo, useRef } from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
+import { FC } from "react";
+// import "slick-carousel/slick/slick-theme.css";
+// import "slick-carousel/slick/slick.css";
 // import styles from "../css/Carousel.module.css";
-import "../css/slick.css";
 // import * as styles from "./Carousel.module.css";
+import Slider from "react-slick";
 import {
     DateDisplay,
     GoogleReview,
@@ -25,6 +24,7 @@ import {
     ReviewVariant,
     Theme,
 } from "../../types/review";
+import { ReviewCard } from "../ReviewCard/ReviewCard";
 
 export const Carousel: FC<{
     reviews: GoogleReview[];
@@ -85,7 +85,7 @@ export const Carousel: FC<{
     maxItems = 3,
     theme = "light",
 }) => {
-    const slider = useRef<Slider>(null);
+    const slider = React.useRef<Slider>(null);
 
     const autoplay = useMemo(() => {
         return carouselAutoplay == null ? true : carouselAutoplay;
@@ -96,17 +96,14 @@ export const Carousel: FC<{
     }, [carouselSpeed]);
 
     return (
-        <div className={""}>
+        <div className={"carousel"}>
             <button
                 onClick={() => slider?.current?.slickPrev()}
                 className={clsx(
-                    // @ts-ignore
-                    styles.btnLeft,
+                    "carousel__btn carousel__btn--left",
                     theme === "light"
-                        ? // @ts-ignore
-                          styles.btnLight
-                        : // @ts-ignore
-                          styles.btnDark
+                        ? "carousel__btn--light"
+                        : "carousel__btn--dark"
                 )}
                 style={{
                     transform: "translateY(-50%)",
@@ -118,8 +115,7 @@ export const Carousel: FC<{
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    // @ts-ignore
-                    className={styles.btnIcon}
+                    // className={styles.btnIcon}
                 >
                     <path
                         strokeLinecap="round"
@@ -131,13 +127,10 @@ export const Carousel: FC<{
             <button
                 onClick={() => slider?.current?.slickNext()}
                 className={clsx(
-                    // @ts-ignore
-                    styles.btnRight,
+                    "carousel__btn carousel__btn--right",
                     theme === "light"
-                        ? // @ts-ignore
-                          styles.btnLight
-                        : // @ts-ignore
-                          styles.btnDark
+                        ? "carousel__btn--light"
+                        : "carousel__btn--dark"
                 )}
                 style={{
                     transform: "translateY(-50%)",
@@ -150,7 +143,7 @@ export const Carousel: FC<{
                     strokeWidth={1.5}
                     stroke="currentColor"
                     // @ts-ignore
-                    className={styles.btnIcon}
+                    // className={styles.btnIcon}
                 >
                     <path
                         strokeLinecap="round"
@@ -159,7 +152,6 @@ export const Carousel: FC<{
                     />
                 </svg>
             </button>
-
             <Slider
                 key={`${autoplay}-${speed}`}
                 dots={true}
@@ -202,20 +194,18 @@ export const Carousel: FC<{
                 {reviews.map((review) => {
                     return (
                         <div
-                            // @ts-ignore
-                            className={styles.card}
+                            // className={styles.card}
                             key={review.reviewId}
                         >
-                            {/* <ReviewCard
-                                    review={review}
-                                    maxCharacters={maxCharacters}
-                                    nameDisplay={nameDisplay}
-                                    logoVariant={logoVariant}
-                                    dateDisplay={dateDisplay}
-                                    reviewVariant={reviewVariant}
-                                    theme={theme}
-                                    highlights={highlights}
-                                /> */}
+                            <ReviewCard
+                                review={review}
+                                maxCharacters={maxCharacters}
+                                nameDisplay={nameDisplay}
+                                logoVariant={logoVariant}
+                                dateDisplay={dateDisplay}
+                                reviewVariant={reviewVariant}
+                                theme={theme}
+                            />
                         </div>
                     );
                 })}

@@ -1,3 +1,71 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.testabc {
+    outline: 1px solid red;
+}
+
+.carousel {
+
+}
+
+.carousel__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    transition: all;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+
+    /* absolute left-0 top-1/2 h-10 w-10 rounded-full flex items-center justify-center shadow hover:shadow-md  transition-all border border-solid */
+}
+
+.carousel__btn:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.carousel__btn--left {
+    left: 0;
+}
+
+.carousel__btn--right {
+    right: 0;
+}
+
+.carousel__btn--light {
+    background: white;
+    color: hsl(0, 0%, 20%);
+    border: 1px solid hsl(0, 0%, 80%);
+}
+
+.carousel__btn--light:hover {
+    background: hsl(0, 0%, 95%);
+    border: 1px solid hsl(0, 0%, 80%);
+}
+
+.carousel__btn--dark {
+    right: 0;
+}
+
+
+.slick-dots > li > button::before {
+    font-size: 45px !important;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+}
+.slick-dots > li.slick-active > button::before {
+    font-size: 45px !important;
+    color: hsl(0, 0%, 20%);
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+}
+
+.slick-track {
+    display: flex;
+    align-items: start;
+}

@@ -9,7 +9,7 @@ export type GoogleReview = {
     comment: string;
     createTime: string;
     updateTime: string;
-    reviewReply: {
+    reviewReply?: {
         comment: string;
         updateTime: string;
     } | null;
