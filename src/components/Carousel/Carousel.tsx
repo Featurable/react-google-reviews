@@ -11,8 +11,8 @@ import React, { useMemo } from "react";
 //     WidgetHighlight,
 // } from "common/types/widget.types";
 import { FC } from "react";
-// import "slick-carousel/slick/slick-theme.css";
-// import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 // import styles from "../css/Carousel.module.css";
 // import * as styles from "./Carousel.module.css";
 import Slider from "react-slick";
@@ -193,7 +193,7 @@ export const Carousel: FC<{
                 {reviews.map((review) => {
                     return (
                         <div
-                            // className={styles.card}
+                            className="carousel__card"
                             key={review.reviewId}
                         >
                             <ReviewCard
