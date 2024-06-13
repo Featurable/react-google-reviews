@@ -17,23 +17,24 @@ import { StarRating } from "../StarRating/StarRating";
 
 export const ReviewCard: FC<{
     review: GoogleReview;
-    maxCharacters: number;
-    nameDisplay: NameDisplay;
-    logoVariant: LogoVariant;
-    dateDisplay: DateDisplay;
-    reviewVariant: ReviewVariant;
+    maxCharacters?: number;
+    nameDisplay?: NameDisplay;
+    logoVariant?: LogoVariant;
+    dateDisplay?: DateDisplay;
+    reviewVariant?: ReviewVariant;
     size?: "sm" | "md" | "lg" | "xl";
     theme?: Theme;
 }> = ({
     review,
-    maxCharacters,
-    nameDisplay,
-    logoVariant,
-    dateDisplay,
-    reviewVariant,
+    maxCharacters = 200,
+    nameDisplay = "firstAndLastInitials",
+    logoVariant = "icon",
+    dateDisplay = "relative",
+    reviewVariant = "card",
     size = "md",
     theme = "light",
 }) => {
+    console.log(review);
     const [isOpen, setIsOpen] = useState(false);
 
     const hasMore = useMemo(() => {
@@ -345,37 +346,37 @@ const ReviewCardReviewer: React.FC<{
                           )}
                 </p>
 
-                {review.updateTime ||
-                    (review.createTime && (
-                        <p
-                            className={clsx(
-                                size === "sm" && "reviewer__date--sm",
-                                size === "md" && "reviewer__date--md",
-                                size === "lg" && "reviewer__date--lg",
-                                size === "xl" && "reviewer__date--xl",
-                                theme === "light" &&
-                                    "reviewer__date--light",
-                                theme === "dark" &&
-                                    "reviewer__date--dark"
-                            )}
-                        >
-                            {dateDisplay === "absolute"
-                                ? new Date(
+                {(review.updateTime || review.createTime) && (
+                    <p
+                        className={clsx(
+                            size === "sm" && "reviewer__date--sm",
+                            size === "md" && "reviewer__date--md",
+                            size === "lg" && "reviewer__date--lg",
+                            size === "xl" && "reviewer__date--xl",
+                            theme === "light" &&
+                                "reviewer__date--light",
+                            theme === "dark" && "reviewer__date--dark"
+                        )}
+                    >
+                        {dateDisplay === "absolute"
+                            ? new Date(
+                                  review.updateTime ??
+                                      review.createTime ??
+                                      ""
+                              ).toLocaleDateString(undefined, {
+                                  year: "numeric",
+                                  month: "long",
+                                  day: "numeric",
+                              })
+                            : getRelativeDate(
+                                  new Date(
                                       review.updateTime ??
-                                          review.createTime
-                                  ).toLocaleDateString(undefined, {
-                                      year: "numeric",
-                                      month: "long",
-                                      day: "numeric",
-                                  })
-                                : getRelativeDate(
-                                      new Date(
-                                          review.updateTime ??
-                                              review.createTime
-                                      )
-                                  )}
-                        </p>
-                    ))}
+                                          review.createTime ??
+                                          ""
+                                  )
+                              )}
+                    </p>
+                )}
             </div>
         </div>
     );

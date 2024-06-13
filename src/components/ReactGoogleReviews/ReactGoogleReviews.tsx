@@ -233,15 +233,25 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
                 })
                 .catch((err) => setError(true))
                 .finally(() => setLoading(false));
+        } else {
+            setLoading(false);
         }
     }, [props.featurableId]);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error loading reviews</div>;
+    }
 
     return (
         <div className="">
             <div>
                 {props.layout === "carousel" && (
                     <Carousel
-                        reviews={EXAMPLE_REVIEWS}
+                        reviews={reviews}
                         maxCharacters={props.maxCharacters}
                         nameDisplay={props.nameDisplay}
                         logoVariant={props.logoVariant}
