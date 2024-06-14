@@ -43,7 +43,7 @@ interface ReactGoogleReviewsBaseProps {
     reviewVariant?: ReviewVariant;
 
     /**
-     * Theme of the carousel.
+     * Color scheme of the component.
      */
     theme?: Theme;
 }

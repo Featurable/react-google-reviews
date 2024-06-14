@@ -120,19 +120,19 @@ There are three layout options currently available:
 
 1. **Badge**: Display a badge with the average rating, total reviews, and link to Google Business profile
 
-![Badge Layout](public/badge-example.png)
-
 ```jsx
  <ReactGoogleReviews layout="badge" featurableId={featurableWidgetId} />
 ```
 
-2. **Carousel**: An interactive carousel that displays reviews
+<img src="public/badge-example.png" alt="Badge Layout" width="200"/>
 
-![Carousel Layout](public/carousel-example.png)
+2. **Carousel**: An interactive carousel that displays reviews
 
 ```jsx
  <ReactGoogleReviews layout="carousel" featurableId={featurableWidgetId} />
 ```
+
+![Carousel Layout](public/carousel-example.png)
 
 3. **Custom renderer**: Render reviews using a custom function
 
@@ -151,10 +151,34 @@ There are three layout options currently available:
 }} />
 ```
 
-### Props
+## Props
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| featurableId | string | Featurable widget ID |
+| reviews | GoogleReview[] | Array of reviews to display, fetched using `dangerouslyFetchPlaceReviews` |
+| layout | `"badge" \| "carousel" \| "custom"` | Layout of the reviews component |
+| nameDisplay?| `"fullNames" \| "firstAndLastInitials" \| "firstNamesOnly"` | How to display names on reviews |;
+| logoVariant? | `"logo" \| "icon" \| "none"` | How to display the Google logo |
+| maxCharacters? | number | When collapsed, the maximum number of characters to display in the review body |
+| dateDisplay? | --- | How to display the review date |
+| reviewVariant? | --- | Review layout variations |
+| theme? | `"light" \| "dark"` | Color scheme of the component |
+| --- | **Carousel Props** | --- |
+| carouselSpeed? | number | Autoplay speed of the carousel in milliseconds |
+| carouselAutoplay? | boolean | Whether to autoplay the carousel |
+| maxItems? | number | Maximum number of items to display at any one time in carousel |
+| --- | **Badge Props** | --- |
+| profileUrl? | string | Link to Google Business profile, if manually fetching reviews via Place API. Using Featurable API will automatically supply this URL. |
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. By using the Featurable API, you agree to the [Featurable Terms of Service](https://featurable.com/terms).
 
 ## Acknowledgements
+
+This library uses [`slick-carousel`](https://github.com/kenwheeler/slick) and [`react-slick`](https://github.com/akiran/react-slick) for the carousel layout.
+
+## Contributing
+
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.

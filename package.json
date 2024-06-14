@@ -1,12 +1,29 @@
 {
   "name": "react-google-reviews",
-  "version": "0.0.1",
-  "description": "",
+  "version": "1.0.0",
+  "description": "A React component to easily display Google reviews using Google Places API or Google My Business API.",
   "scripts": {
     "rollup": "rollup -c --bundleConfigAsCjs"
   },
-  "author": "Ryan Chiang",
-  "license": "ISC",
+  "keywords": [
+    "react",
+    "google",
+    "reviews",
+    "google reviews",
+    "google places",
+    "google my business"
+  ],
+  "author": "Ryan Chiang <ryan@featurable.com> (https://featurable.com)",
+  "homepage": "https://github.com/ryanschiang/react-google-reviews#readme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryanschiang/react-google-reviews.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ryanschiang/react-google-reviews/issues",
+    "email": "ryan@featurable.com"
+  },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
@@ -45,5 +62,8 @@
     "clsx": "^2.1.1",
     "react-slick": "^0.30.2",
     "slick-carousel": "^1.8.1"
+  },
+  "engines": {
+    "node": ">= 10.13"
   }
 }
