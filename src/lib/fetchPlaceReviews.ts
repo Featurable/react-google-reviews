@@ -37,7 +37,7 @@ type FetchPlaceReviewsResponse =
  * You can find your Place ID using the [Place ID Finder Tool](https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder).
  * For businesses without a physical address, see our [docs](https://featurable.com/docs/google-reviews/faq#how-to-get-google-reviews-for-a-business-without-a-physical-address).
  */
-const dangerouslyFetchPlaceReviews = async (
+export const dangerouslyFetchPlaceReviews = async (
     placeId: string,
     apiKey: string
 ): Promise<FetchPlaceReviewsResponse> => {
@@ -141,5 +141,3 @@ const dangerouslyFetchPlaceReviews = async (
         }
     }
 };
-
-export default dangerouslyFetchPlaceReviews;
