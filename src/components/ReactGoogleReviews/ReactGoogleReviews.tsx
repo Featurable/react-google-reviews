@@ -9,6 +9,7 @@ import {
     ReviewVariant,
     Theme,
 } from "../../types/review";
+import { Badge } from "../Badge/Badge";
 import { Carousel } from "../Carousel/Carousel";
 
 interface ReactGoogleReviewsBaseProps {
@@ -115,87 +116,6 @@ type ReactGoogleReviewsProps =
     | ReactGoogleReviewsCustomProps
     | ReactGoogleReviewsBadgeProps;
 
-export const EXAMPLE_REVIEWS: GoogleReview[] = [
-    {
-        reviewId: "1",
-        reviewer: {
-            displayName: "Isabella Harris",
-            profilePhotoUrl: "",
-            isAnonymous: false,
-        },
-        comment:
-            "I was hesitant to invest in this product at first, but I'm so glad I did. It has been a total game-changer for me and has made a significant positive impact on my work. It's worth every penny.",
-        starRating: 5,
-        createTime: new Date().toISOString(),
-        updateTime: new Date().toISOString(),
-    },
-    {
-        reviewId: "2",
-        reviewer: {
-            displayName: "Sophia Moore",
-            profilePhotoUrl: "",
-            isAnonymous: false,
-        },
-        comment:
-            "I've tried similar products in the past, but none of them compare to this one. It's in a league of its own in terms of functionality, durability, and overall value. I can't recommend it highly enough!",
-        starRating: 5,
-        createTime: new Date().toISOString(),
-        updateTime: new Date().toISOString(),
-    },
-    {
-        reviewId: "3",
-        reviewer: {
-            displayName: "John Doe",
-            profilePhotoUrl: "",
-            isAnonymous: false,
-        },
-        comment:
-            "This product is a game-changer! I've been using it for a few months now and it has consistently delivered excellent results. It's easy to use, well-designed, and built to last.",
-        starRating: 5,
-        createTime: new Date().toISOString(),
-        updateTime: new Date().toISOString(),
-    },
-    {
-        reviewId: "4",
-        reviewer: {
-            displayName: "Emily Davis",
-            profilePhotoUrl: "",
-            isAnonymous: false,
-        },
-        comment:
-            "I've been using this product for a few weeks now and I'm blown away by how well it works. It's intuitive, easy to use, and has already saved me a ton of time. I can't imagine going back to the way I used to do things before I had this product. I've been using it for a few months now and it has consistently delivered excellent results. It's easy to use, well-designed, and built to last.",
-        starRating: 5,
-        createTime: new Date().toISOString(),
-        updateTime: new Date().toISOString(),
-    },
-    {
-        reviewId: "5",
-        reviewer: {
-            displayName: "David Wilson",
-            profilePhotoUrl: "",
-            isAnonymous: false,
-        },
-        comment:
-            "I was skeptical at first, but after using this product for a while, I'm a believer. It's well-designed, durable, and does exactly what it's supposed to do. I couldn't be happier with my purchase.",
-        starRating: 5,
-        createTime: new Date().toISOString(),
-        updateTime: new Date().toISOString(),
-    },
-    {
-        reviewId: "6",
-        reviewer: {
-            displayName: "Jessica Brown",
-            profilePhotoUrl: "",
-            isAnonymous: false,
-        },
-        comment:
-            "I love this product! It has exceeded my expectations in every way. Setup was a breeze and it works flawlessly. I've already recommended it to several friends and family members.",
-        starRating: 5,
-        createTime: new Date().toISOString(),
-        updateTime: new Date().toISOString(),
-    },
-];
-
 const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
     ...props
 }) => {
@@ -231,7 +151,10 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
                     setTotalReviewCount(data.totalReviewCount);
                     setAverageRating(data.averageRating);
                 })
-                .catch((err) => setError(true))
+                .catch((err) => {
+                    console.error(err);
+                    setError(true);
+                })
                 .finally(() => setLoading(false));
         } else {
             setLoading(false);
@@ -239,11 +162,40 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
     }, [props.featurableId]);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return (
+            <div className="loading">
+                <svg
+                    role={"status"}
+                    aria-hidden="true"
+                    className="loading__spinner"
+                    viewBox="0 0 100 101"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                        fill="currentColor"
+                    />
+                    <path
+                        d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                        fill="currentFill"
+                    />
+                </svg>
+                <p className={"loading__text"}>Loading reviews...</p>
+            </div>
+        );
     }
 
-    if (error) {
-        return <div>Error loading reviews</div>;
+    if (
+        error ||
+        (props.layout === "badge" &&
+            (averageRating === null || totalReviewCount === null))
+    ) {
+        return (
+            <div className="error">
+                Something went wrong loading reviews.
+            </div>
+        );
     }
 
     return (
@@ -264,10 +216,16 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
                     />
                 )}
 
-                {props.layout === "badge" && null}
+                {props.layout === "badge" && (
+                    <Badge
+                        averageRating={averageRating!}
+                        totalReviewCount={totalReviewCount!}
+                        profileUrl={profileUrl}
+                        theme={props.theme}
+                    />
+                )}
 
-                {props.layout === "custom" &&
-                    props.renderer(EXAMPLE_REVIEWS)}
+                {props.layout === "custom" && props.renderer(reviews)}
             </div>
         </div>
     );
