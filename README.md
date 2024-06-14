@@ -44,6 +44,10 @@ documentation can also be found at
 
 Documentation and examples at [https://featurable.com/docs/react-google-reviews](https://featurable.com/docs/react-google-reviews). Source code at [https://github.com/ryanschiang/react-google-reviews](https://github.com/ryanschiang/react-google-reviews).
 
+## Demo
+
+Check out the [live demo](https://featurable.com/docs/react-google-reviews) to see the React Google Reviews library in action.
+
 ## Installation
 
 Install it from npm:
@@ -67,7 +71,7 @@ import "react-google-reviews/dist/index.css";
 function Reviews() {
   // Create a free Featurable account at https://featurable.com
   // Then create a new Featurable widget and copy the widget ID
-  const featurableWidgetId = "842ncdd8-0f40-438d-9cd6-b01907d1094a";
+  const featurableWidgetId = "842ncdd8-0f40-438d-9c...";
 
   return (
     <ReactGoogleReviews layout="carousel" featurableId={featurableWidgetId} />
@@ -75,7 +79,7 @@ function Reviews() {
 }
 ```
 
-### Using the Google Places API
+### Using the Google Places API (limited to 5 reviews)
 
 Prerequisites:
 1. Create a Google Cloud Platform account at [https://cloud.google.com](https://cloud.google.com)
@@ -97,7 +101,8 @@ async function ReviewsPage() {
   const reviews = await dangerouslyFetchPlaceReviews(placeId, apiKey)
 
   return (
-    <ReactGoogleReviews layout="carousel" reviews={reviews} />
+    // Carousel and other layouts require wrapping ReactGoogleReviews in a client component
+    <ReactGoogleReviews layout="badge" reviews={reviews} />
   );
 }
 
@@ -109,8 +114,47 @@ export default ReviewsPage;
 
 ## Configuration
 
-## Example
+### Layout
+
+There are three layout options currently available:
+
+1. **Badge**: Display a badge with the average rating, total reviews, and link to Google Business profile
+
+![Badge Layout](public/badge-example.png)
+
+```jsx
+ <ReactGoogleReviews layout="badge" featurableId={featurableWidgetId} />
+```
+
+2. **Carousel**: An interactive carousel that displays reviews
+
+![Carousel Layout](public/carousel-example.png)
+
+```jsx
+ <ReactGoogleReviews layout="carousel" featurableId={featurableWidgetId} />
+```
+
+3. **Custom renderer**: Render reviews using a custom function
+
+```jsx
+<ReactGoogleReviews layout="custom" featurableId={featurableWidgetId} renderer={(reviews) => {
+  return (
+    <div>
+      {reviews.map(({ reviewId, reviewer, comment }) => (
+        <div key={reviewId}>
+          <h3>{reviewer.displayName}</h3>
+          <p>{comment}</p>
+        </div>
+      ))}
+    </div>
+  );
+}} />
+```
+
+### Props
 
 ## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. By using the Featurable API, you agree to the [Featurable Terms of Service](https://featurable.com/terms).
 
 ## Acknowledgements
