@@ -476,11 +476,18 @@
     justify-content: center;
 }
 
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .loading__spinner {
     height: 40px;
     width: 40px;
     color: #e5e7eb;
     fill: #2563eb;
+    animation: spin 1s linear infinite !important;
 }
 
 .loading__text {
