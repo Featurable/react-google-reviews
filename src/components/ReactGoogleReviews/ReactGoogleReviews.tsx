@@ -200,33 +200,31 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
 
     return (
         <div className="">
-            <div>
-                {props.layout === "carousel" && (
-                    <Carousel
-                        reviews={reviews}
-                        maxCharacters={props.maxCharacters}
-                        nameDisplay={props.nameDisplay}
-                        logoVariant={props.logoVariant}
-                        dateDisplay={props.dateDisplay}
-                        reviewVariant={props.reviewVariant}
-                        carouselSpeed={props.carouselSpeed}
-                        carouselAutoplay={props.carouselAutoplay}
-                        maxItems={props.maxItems}
-                        theme={props.theme}
-                    />
-                )}
+            {props.layout === "carousel" && (
+                <Carousel
+                    reviews={reviews}
+                    maxCharacters={props.maxCharacters}
+                    nameDisplay={props.nameDisplay}
+                    logoVariant={props.logoVariant}
+                    dateDisplay={props.dateDisplay}
+                    reviewVariant={props.reviewVariant}
+                    carouselSpeed={props.carouselSpeed}
+                    carouselAutoplay={props.carouselAutoplay}
+                    maxItems={props.maxItems}
+                    theme={props.theme}
+                />
+            )}
 
-                {props.layout === "badge" && (
-                    <Badge
-                        averageRating={averageRating!}
-                        totalReviewCount={totalReviewCount!}
-                        profileUrl={profileUrl}
-                        theme={props.theme}
-                    />
-                )}
+            {props.layout === "badge" && (
+                <Badge
+                    averageRating={averageRating!}
+                    totalReviewCount={totalReviewCount!}
+                    profileUrl={profileUrl}
+                    theme={props.theme}
+                />
+            )}
 
-                {props.layout === "custom" && props.renderer(reviews)}
-            </div>
+            {props.layout === "custom" && props.renderer(reviews)}
         </div>
     );
 };
