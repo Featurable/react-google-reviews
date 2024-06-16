@@ -1,21 +1,8 @@
 import clsx from "clsx";
-import React, { useMemo } from "react";
-// import { GoogleReview } from "common/types/review.types";
-// import {
-//     WidgetConfig,
-//     WidgetConfigDateDisplay,
-//     WidgetConfigLogoVariant,
-//     WidgetConfigNameDisplay,
-//     WidgetConfigReviewVariant,
-//     WidgetConfigTheme,
-//     WidgetHighlight,
-// } from "common/types/widget.types";
-import { FC } from "react";
+import React, { FC, useMemo } from "react";
+import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-// import styles from "../css/Carousel.module.css";
-// import * as styles from "./Carousel.module.css";
-import Slider from "react-slick";
 import {
     DateDisplay,
     GoogleReview,
