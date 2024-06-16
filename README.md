@@ -48,6 +48,17 @@ Documentation and examples at [https://featurable.com/docs/react-google-reviews]
 
 Check out the [live demo](https://featurable.com/docs/react-google-reviews) to see the React Google Reviews library in action.
 
+## Features
+
+1. **Customizable**: Choose from three layout options and customize the appearance of the reviews component
+2. **SEO-friendly**: Include JSON-LD structured data for search engines to index your reviews
+3. **Responsive**: Works on all devices and screen sizes
+4. **Fast**: Caches reviews for quick loading and improved performance
+5. **Free**: No cost to use the Featurable API for fetching reviews
+6. **Fresh**: Automatically updates with new reviews from Google every 24 hours (using Featurable API)
+7. **Accessible**: Built with accessibility in mind (WAI-ARIA compliant)
+8. **Lightweight**: Small bundle size and minimal dependencies
+
 ## Installation
 
 Install it from npm:
@@ -164,6 +175,11 @@ There are three layout options currently available:
 | dateDisplay? | --- | How to display the review date |
 | reviewVariant? | --- | Review layout variations |
 | theme? | `"light" \| "dark"` | Color scheme of the component |
+| structuredData? | boolean | Whether to include JSON-LD structured data for SEO |
+| brandName? | string | Customize business name for structured data |
+| productName? | string | Customize product name for structured data |
+| productDescription? | string | Optional product description for structured data |
+| accessibility? | boolean | Enable/disable accessibility features |
 | --- | **Carousel Props** | --- |
 | carouselSpeed? | number | Autoplay speed of the carousel in milliseconds |
 | carouselAutoplay? | boolean | Whether to autoplay the carousel |
