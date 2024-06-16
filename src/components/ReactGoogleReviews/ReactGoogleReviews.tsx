@@ -17,35 +17,66 @@ interface ReactGoogleReviewsBaseProps {
      * Layout of the reviews.
      */
     layout: "carousel" | "badge" | "custom";
+
     /**
      * How to display the reviewer's name.
+     * Default: "firstAndLastInitials"
      */
     nameDisplay?: NameDisplay;
 
     /**
      * How to display the Google logo
+     * Default: "icon"
      */
     logoVariant?: LogoVariant;
 
     /**
      * When collapsed, the maximum number of characters to display in the review body.
+     * Default: 200
      */
     maxCharacters?: number;
 
     /**
      * How to display the review date.
+     * Default: "relative"
      */
     dateDisplay?: DateDisplay;
 
     /**
-     * How to display the review.
+     * Review card layout variant.
+     * Default: "card"
      */
     reviewVariant?: ReviewVariant;
 
     /**
      * Color scheme of the component.
+     * Default: "light"
      */
     theme?: Theme;
+
+    /**
+     * Enable or disable structured data.
+     * Default: false
+     */
+    structuredData?: boolean;
+
+    /**
+     * Brand name for structured data.
+     * Default: current page title
+     */
+    brandName?: string;
+
+    /**
+     * Product/service name for structured data.
+     * Default: current page title
+     */
+    productName?: string;
+
+    /**
+     * Short description of the product/service for structured data.
+     * Default: empty
+     */
+    productDescription?: string;
 }
 
 interface ReactGoogleReviewsWithPlaceIdProps
@@ -81,16 +112,19 @@ type ReactGoogleReviewsCarouselProps =
         layout: "carousel";
         /**
          * Autoplay speed of the carousel in milliseconds.
+         * Default: 3000
          */
         carouselSpeed?: number;
 
         /**
          * Whether to autoplay the carousel.
+         * Default: true
          */
         carouselAutoplay?: boolean;
 
         /**
          * Maximum number of items to display at any one time.
+         * Default: 3
          */
         maxItems?: number;
     };
@@ -98,8 +132,9 @@ type ReactGoogleReviewsCarouselProps =
 type ReactGoogleReviewsBadgeProps =
     ReactGooglereviewsBasePropsWithRequired & {
         layout: "badge";
+
         /**
-         * Google profile URL.
+         * Google profile URL, if manually fetching Google Places API.
          * This is automatically fetched when using the Featurable API.
          */
         profileUrl?: string;
@@ -200,6 +235,44 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
 
     return (
         <div className="">
+            {props.structuredData &&
+                averageRating !== null &&
+                totalReviewCount !== null && (
+                    <script type="application/ld+json">
+                        {`{
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "${props.productName ?? document.title}",
+    "url": "${document.location.href}",
+    "brand": { "@type": "Brand", "name": "${
+        props.brandName ?? document.title
+    }" },
+    "description": "${props.productDescription ?? ""}",
+    "image": [],
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": ${averageRating},
+        "reviewCount": ${totalReviewCount},
+        "bestRating": 5,
+        "worstRating": 1
+    },
+    "review": [${reviews
+        .filter((r) => !!r.reviewer.isAnonymous)
+        .slice(0, 10)
+        .map((review) => {
+            return `{
+            "@type": "Review",
+            "reviewBody": "${review.comment}",
+            "datePublished": "${review.createTime}",
+            "author": { "@type": "Person", "name": "${review.reviewer.displayName}" },
+            "reviewRating": { "@type": "Rating", "ratingValue": ${review.starRating} }
+        }`;
+        })}]
+}
+`}
+                    </script>
+                )}
+
             {props.layout === "carousel" && (
                 <Carousel
                     reviews={reviews}
