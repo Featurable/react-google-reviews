@@ -164,6 +164,8 @@ There are three layout options currently available:
 
 ## Props
 
+### Common Props
+
 | Prop | Type | Description |
 | --- | --- | --- |
 | featurableId | string | Featurable widget ID |
@@ -180,11 +182,19 @@ There are three layout options currently available:
 | productName? | string | Customize product name for structured data |
 | productDescription? | string | Optional product description for structured data |
 | accessibility? | boolean | Enable/disable accessibility features |
-| --- | **Carousel Props** | --- |
+
+### Carousel Props
+
+| Prop | Type | Description |
+| --- | --- | --- |
 | carouselSpeed? | number | Autoplay speed of the carousel in milliseconds |
 | carouselAutoplay? | boolean | Whether to autoplay the carousel |
 | maxItems? | number | Maximum number of items to display at any one time in carousel |
-| --- | **Badge Props** | --- |
+
+### Badge Props
+
+| Prop | Type | Description |
+| --- | --- | --- |
 | profileUrl? | string | Link to Google Business profile, if manually fetching reviews via Place API. Using Featurable API will automatically supply this URL. |
 
 ## License
