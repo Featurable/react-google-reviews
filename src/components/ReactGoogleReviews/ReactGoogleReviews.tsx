@@ -77,6 +77,11 @@ interface ReactGoogleReviewsBaseProps {
      * Default: empty
      */
     productDescription?: string;
+
+    /**
+     * Enable/disable accessibility features.
+     */
+    accessibility?: boolean;
 }
 
 interface ReactGoogleReviewsWithPlaceIdProps
@@ -285,6 +290,7 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
                     carouselAutoplay={props.carouselAutoplay}
                     maxItems={props.maxItems}
                     theme={props.theme}
+                    accessibility={props.accessibility}
                 />
             )}
 

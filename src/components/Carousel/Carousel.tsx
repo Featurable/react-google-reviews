@@ -38,6 +38,7 @@ export const Carousel: FC<{
     carouselAutoplay?: boolean;
     maxItems?: number;
     theme?: Theme;
+    accessibility?: boolean;
 }> = ({
     reviews,
     maxCharacters = 200,
@@ -49,6 +50,7 @@ export const Carousel: FC<{
     carouselSpeed = 3000,
     maxItems = 3,
     theme = "light",
+    accessibility = true,
 }) => {
     const slider = React.useRef<Slider>(null);
 
@@ -61,7 +63,11 @@ export const Carousel: FC<{
     }, [carouselSpeed]);
 
     return (
-        <div className={"carousel"}>
+        <div
+            className={"carousel"}
+            role="region"
+            aria-label="Customer Reviews Carousel"
+        >
             <button
                 onClick={() => slider?.current?.slickPrev()}
                 className={clsx(
@@ -73,6 +79,8 @@ export const Carousel: FC<{
                 style={{
                     transform: "translateY(-50%)",
                 }}
+                role="button"
+                aria-description="Previous Review"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -100,6 +108,8 @@ export const Carousel: FC<{
                 style={{
                     transform: "translateY(-50%)",
                 }}
+                role="button"
+                aria-description="Next Review"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -128,6 +138,16 @@ export const Carousel: FC<{
                 autoplay={autoplay}
                 autoplaySpeed={speed}
                 arrows={false}
+                accessibility={accessibility}
+                focusOnSelect={accessibility}
+                customPaging={(i) => (
+                    <button
+                        tabIndex={0}
+                        aria-label={`Review ${i + 1}`}
+                    >
+                        {i + 1}
+                    </button>
+                )}
                 responsive={[
                     {
                         breakpoint: 1280,
@@ -155,11 +175,13 @@ export const Carousel: FC<{
                     },
                 ]}
             >
-                {reviews.map((review) => {
+                {reviews.map((review, index) => {
                     return (
                         <div
                             className="carousel__card"
                             key={review.reviewId ?? review.comment}
+                            tabIndex={index === 0 ? 0 : -1}
+                            aria-label={`Review ${index + 1}`}
                         >
                             <ReviewCard
                                 review={review}

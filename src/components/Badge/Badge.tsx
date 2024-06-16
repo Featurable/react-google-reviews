@@ -29,7 +29,12 @@ export const Badge: FC<{
                 )}
             >
                 <div>
-                    <svg viewBox="0 0 512 512" width="44" height="44">
+                    <svg
+                        viewBox="0 0 512 512"
+                        width="44"
+                        height="44"
+                        aria-label="Google logo"
+                    >
                         <g
                             id="logo-g"
                             height="44"
@@ -59,7 +64,7 @@ export const Badge: FC<{
                     </svg>
                 </div>
                 <div className="badge__subcontainer">
-                    <p
+                    <span
                         className={clsx(
                             "badge__label",
                             theme === "light"
@@ -68,9 +73,9 @@ export const Badge: FC<{
                         )}
                     >
                         Google Rating
-                    </p>
+                    </span>
                     <div className="badge__rating__container">
-                        <p
+                        <span
                             className={clsx(
                                 "badge__rating",
                                 theme === "light"
@@ -79,8 +84,11 @@ export const Badge: FC<{
                             )}
                         >
                             {averageRating.toFixed(1)}
-                        </p>
-                        <div className={"badge__stars"}>
+                        </span>
+                        <div
+                            className={"badge__stars"}
+                            aria-hidden="true"
+                        >
                             <div
                                 className={"badge__stars__container"}
                             >
