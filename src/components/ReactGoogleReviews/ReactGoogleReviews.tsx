@@ -211,7 +211,9 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
     );
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-    const [profileUrl, setProfileUrl] = useState<string | null>(null);
+    const [profileUrl, setProfileUrl] = useState<string | null>(
+        props.layout === "badge" ? props.profileUrl ?? null : null
+    );
     const [totalReviewCount, setTotalReviewCount] = useState<
         number | null
     >(props.totalReviewCount ?? null);
