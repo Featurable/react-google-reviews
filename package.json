@@ -1,6 +1,6 @@
 {
   "name": "react-google-reviews",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A React component to easily display Google reviews using Google Places API or Google My Business API.",
   "scripts": {
     "rollup": "rollup -c --bundleConfigAsCjs"
