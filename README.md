@@ -174,8 +174,8 @@ There are three layout options currently available:
 | nameDisplay?| `"fullNames" \| "firstAndLastInitials" \| "firstNamesOnly"` | How to display names on reviews |;
 | logoVariant? | `"logo" \| "icon" \| "none"` | How to display the Google logo |
 | maxCharacters? | number | When collapsed, the maximum number of characters to display in the review body |
-| dateDisplay? | --- | How to display the review date |
-| reviewVariant? | --- | Review layout variations |
+| dateDisplay? | `"relative" \| "absolute"` | How to display the review date |
+| reviewVariant? | `"card" \| "testimonial"` | Review layout variations |
 | theme? | `"light" \| "dark"` | Color scheme of the component |
 | structuredData? | boolean | Whether to include JSON-LD structured data for SEO |
 | brandName? | string | Customize business name for structured data |
@@ -199,6 +199,12 @@ There are three layout options currently available:
 | --- | --- | --- |
 | profileUrl? | string | Link to Google Business profile, if manually fetching reviews via Place API. Using Featurable API will automatically supply this URL. |
 
+### Custom Layout Props
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| renderer? | (reviews: ReactGoogleReview[]) => React.ReactNode | Custom rendering function |
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. By using the Featurable API, you agree to the [Featurable Terms of Service](https://featurable.com/terms).
@@ -210,3 +216,7 @@ This library uses [`slick-carousel`](https://github.com/kenwheeler/slick) and [`
 ## Contributing
 
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+## Future Work
+
+[ ] Make carousel component responsive to container size
