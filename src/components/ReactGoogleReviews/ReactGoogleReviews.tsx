@@ -12,7 +12,23 @@ import {
 import { Badge } from "../Badge/Badge";
 import { Carousel } from "../Carousel/Carousel";
 
-interface ReactGoogleReviewsBaseProps {
+type StructuredDataProps = {
+    /**
+     * Total number of reviews.
+     * This is automatically fetched when passing `featurableId`.
+     * Required if `structuredData` is true and passing `reviews`.
+     */
+    totalReviewCount?: number;
+
+    /**
+     * Average star rating from 1 to 5.
+     * This is automatically fetched when passing `featurableId`.
+     * Required if `structuredData` is true and passing `reviews`.
+     */
+    averageRating?: number;
+};
+
+type ReactGoogleReviewsBaseProps = {
     /**
      * Layout of the reviews.
      */
@@ -82,30 +98,45 @@ interface ReactGoogleReviewsBaseProps {
      * Enable/disable accessibility features.
      */
     accessibility?: boolean;
-}
+} & StructuredDataProps;
 
-interface ReactGoogleReviewsWithPlaceIdProps
-    extends ReactGoogleReviewsBaseProps {
-    /**
-     * If using Google Places API, use `dangerouslyFetchPlaceDetails` to get reviews server-side and pass them to the client.
-     * Note: the Places API limits the number of reviews to FIVE most recent reviews.
-     */
-    reviews: GoogleReview[];
-    featurableId?: never;
-}
+type ReactGoogleReviewsWithPlaceIdBaseProps =
+    ReactGoogleReviewsBaseProps & {
+        /**
+         * If using Google Places API, use `dangerouslyFetchPlaceDetails` to get reviews server-side and pass them to the client.
+         * Note: the Places API limits the number of reviews to FIVE most recent reviews.
+         */
+        reviews: GoogleReview[];
+        featurableId?: never;
+    };
 
-interface ReactGoogleReviewsWithFeaturableIdProps
-    extends ReactGoogleReviewsBaseProps {
-    reviews?: never;
-    /**
-     * If using Featurable API, pass the ID of the widget after setting it up in the dashboard.
-     * Using the free Featurable API allows for unlimited reviews.
-     * https://featurable.com/app/widgets
-     */
-    featurableId: string;
-}
+type ReactGoogleReviewsWithPlaceIdWithStructuredDataProps = {
+    structuredData: true;
+} & Required<StructuredDataProps>;
 
-type ReactGooglereviewsBasePropsWithRequired =
+type ReactGoogleReviewsWithPlaceIdWithoutStructuredDataProps = {
+    structuredData?: false;
+};
+
+type ReactGoogleReviewsWithPlaceIdProps =
+    ReactGoogleReviewsWithPlaceIdBaseProps &
+        (
+            | ReactGoogleReviewsWithPlaceIdWithStructuredDataProps
+            | ReactGoogleReviewsWithPlaceIdWithoutStructuredDataProps
+        );
+
+type ReactGoogleReviewsWithFeaturableIdProps =
+    ReactGoogleReviewsBaseProps & {
+        reviews?: never;
+        /**
+         * If using Featurable API, pass the ID of the widget after setting it up in the dashboard.
+         * Using the free Featurable API allows for unlimited reviews.
+         * https://featurable.com/app/widgets
+         */
+        featurableId: string;
+    };
+
+type ReactGoogleReviewsBasePropsWithRequired =
     ReactGoogleReviewsBaseProps &
         (
             | ReactGoogleReviewsWithPlaceIdProps
@@ -113,7 +144,7 @@ type ReactGooglereviewsBasePropsWithRequired =
         );
 
 type ReactGoogleReviewsCarouselProps =
-    ReactGooglereviewsBasePropsWithRequired & {
+    ReactGoogleReviewsBasePropsWithRequired & {
         layout: "carousel";
         /**
          * Autoplay speed of the carousel in milliseconds.
@@ -135,18 +166,18 @@ type ReactGoogleReviewsCarouselProps =
     };
 
 type ReactGoogleReviewsBadgeProps =
-    ReactGooglereviewsBasePropsWithRequired & {
+    ReactGoogleReviewsBasePropsWithRequired & {
         layout: "badge";
 
         /**
-         * Google profile URL, if manually fetching Google Places API.
-         * This is automatically fetched when using the Featurable API.
+         * Google profile URL, if manually fetching Google Places API and passing `reviews`.
+         * This is automatically fetched when passing `featurableId`.
          */
         profileUrl?: string;
     };
 
 type ReactGoogleReviewsCustomProps =
-    ReactGooglereviewsBasePropsWithRequired & {
+    ReactGoogleReviewsBasePropsWithRequired & {
         layout: "custom";
         renderer: (reviews: GoogleReview[]) => React.ReactNode;
     };
@@ -159,6 +190,22 @@ type ReactGoogleReviewsProps =
 const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
     ...props
 }) => {
+    if (
+        props.totalReviewCount != null &&
+        (props.totalReviewCount < 0 ||
+            !Number.isInteger(props.totalReviewCount))
+    ) {
+        throw new Error(
+            "totalReviewCount must be a positive integer"
+        );
+    }
+    if (
+        props.averageRating != null &&
+        (props.averageRating < 1 || props.averageRating > 5)
+    ) {
+        throw new Error("averageRating must be between 1 and 5");
+    }
+
     const [reviews, setReviews] = useState<GoogleReview[]>(
         props.reviews ?? []
     );
@@ -167,9 +214,9 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
     const [profileUrl, setProfileUrl] = useState<string | null>(null);
     const [totalReviewCount, setTotalReviewCount] = useState<
         number | null
-    >(null);
+    >(props.totalReviewCount ?? null);
     const [averageRating, setAverageRating] = useState<number | null>(
-        null
+        props.averageRating ?? null
     );
 
     useEffect(() => {

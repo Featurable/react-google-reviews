@@ -182,6 +182,8 @@ There are three layout options currently available:
 | productName? | string | Customize product name for structured data |
 | productDescription? | string | Optional product description for structured data |
 | accessibility? | boolean | Enable/disable accessibility features |
+| totalReviewCount? | number | Total number of reviews on Google Business profile. This is automatically fetched if using `featurableId`. Otherwise, this is required if passing reviews manually and `structuredData` is true. |
+| averageRating? | number | Average rating for Google Business profile. This is automatically fetched if using `featurableId`. Otherwise, this is required if passing reviews manually and `structuredData` is true. |
 
 ### Carousel Props
 
