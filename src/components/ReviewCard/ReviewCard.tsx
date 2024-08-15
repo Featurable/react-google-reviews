@@ -34,7 +34,6 @@ export const ReviewCard: FC<{
     size = "md",
     theme = "light",
 }) => {
-    console.log(review);
     const [isOpen, setIsOpen] = useState(false);
 
     const hasMore = useMemo(() => {
