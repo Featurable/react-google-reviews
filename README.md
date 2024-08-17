@@ -46,7 +46,7 @@ Documentation and examples at [https://featurable.com/docs/react-google-reviews]
 
 ## Demo
 
-Check out the [live demo](https://featurable.com/docs/react-google-reviews) to see the React Google Reviews library in action.
+Check out the [live demo](https://featurable.com/docs/react-google-reviews#live-demo) to see the React Google Reviews library in action.
 
 ## Features
 
@@ -73,7 +73,10 @@ npm install react-google-reviews
 
 Prerequisites:
 1. Create a free Featurable account at [https://featurable.com](https://featurable.com)
-2. Create a new Featurable widget and copy the widget ID
+2. Create a new Featurable widget
+3. Click Embed > API and copy the widget ID
+
+![Copy Featurable Widget ID](public/featurable-widget-id.png)
 
 ```jsx
 import { ReactGoogleReviews } from "react-google-reviews";
@@ -161,6 +164,14 @@ There are three layout options currently available:
   );
 }} />
 ```
+
+### CSS Styling
+
+The component uses BEM (Block Element Modifier) CSS classes for styling. You can override the default styles by importing the CSS file and adding your own styles.
+
+Please see the documentation for a list of CSS classes and examples of how to style the component.
+
+[View CSS classes and examples](https://featurable.com/docs/react-google-reviews#css-classes)
 
 ## Props
 
