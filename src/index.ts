@@ -4,8 +4,8 @@ import { dangerouslyFetchPlaceReviews } from "./lib/fetchPlaceReviews";
 import { FeaturableAPIResponse, GoogleReview } from "./types/review";
 
 export {
+    dangerouslyFetchPlaceReviews,
     FeaturableAPIResponse,
     GoogleReview as ReactGoogleReview,
     ReactGoogleReviews,
-    dangerouslyFetchPlaceReviews,
 };

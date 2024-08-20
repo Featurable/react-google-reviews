@@ -32,7 +32,9 @@ export default [
         skip: ['react', 'react-dom'],
       }),
       commonjs(),
-      typescript({ tsconfig: "./tsconfig.json" }),
+      typescript({ 
+        tsconfig: "./tsconfig.json",
+       }),
       postcss({
         extract: true, 
         minimize: true,

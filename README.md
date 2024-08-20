@@ -2,7 +2,7 @@
 
 # React Google Reviews
 
-![React Google Reviews Integration by Featurable](public/react-google-reviews.jpg)
+![React Google Reviews Integration by Featurable](public/images/react-google-reviews.jpg)
 
 <div align="center">
   <strong>Making adding Google reviews to any website beautiful, easy, and free!</strong><br />
@@ -30,7 +30,7 @@
 
 <a href="https://github.com/premail">
 
-<img src="public/featurable-icon.svg" alt="Featurable" width="50" height="50" align="left" />
+<img src="public/images/featurable-icon.svg" alt="Featurable" width="50" height="50" align="left" />
 
 </a><strong>This
 React Google Reviews library is brought to you by
@@ -76,7 +76,7 @@ Prerequisites:
 2. Create a new Featurable widget
 3. Click Embed > API and copy the widget ID
 
-![Copy Featurable Widget ID](public/featurable-widget-id.png)
+![Copy Featurable Widget ID](public/images/featurable-widget-id.png)
 
 ```jsx
 import { ReactGoogleReviews } from "react-google-reviews";
@@ -138,7 +138,7 @@ There are three layout options currently available:
  <ReactGoogleReviews layout="badge" featurableId={featurableWidgetId} />
 ```
 
-<img src="public/badge-example.png" alt="Badge Layout" width="200"/>
+<img src="public/images/badge-example.png" alt="Badge Layout" width="200"/>
 
 2. **Carousel**: An interactive carousel that displays reviews
 
@@ -146,7 +146,7 @@ There are three layout options currently available:
  <ReactGoogleReviews layout="carousel" featurableId={featurableWidgetId} />
 ```
 
-![Carousel Layout](public/carousel-example.png)
+![Carousel Layout](public/images/carousel-example.png)
 
 3. **Custom renderer**: Render reviews using a custom function
 
