@@ -1,6 +1,127 @@
-import clsx from "clsx";
-import React, { FC, useMemo } from "react";
+/** @jsxImportSource @emotion/react */
+
+import { css } from "@emotion/react";
+import { FC, useMemo } from "react";
 import { Theme } from "../../types/review";
+import { GoogleIcon } from "../Google/GoogleIcon";
+
+const badge = css`
+    text-align: center;
+    width: 100%;
+`;
+
+const badgeContainer = css`
+    text-align: left;
+    display: inline-flex;
+    align-items: center;
+    border-top: 4px solid #10b981;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 0 auto;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1),
+        0 1px 2px -1px rgb(0 0 0 / 0.1);
+`;
+
+const badgeContainerLight = css`
+    background: white;
+`;
+
+const badgeContainerDark = css`
+    background: #111827;
+`;
+
+const badgeGoogleIcon = css`
+    height: 42px;
+    width: 42px;
+`;
+
+const badgeInnerContainer = css`
+    padding-left: 1rem;
+`;
+
+const badgeLabel = css`
+    font-size: 1rem;
+    font-weight: 500;
+`;
+
+const badgeLabelLight = css`
+    color: #111827;
+`;
+
+const badgeLabelDark = css`
+    color: #f9fafb;
+`;
+
+const badgeRatingContainer = css`
+    display: flex;
+    align-items: center;
+    margin-top: 6px;
+`;
+
+const badgeRating = css`
+    font-size: 16px;
+    font-weight: 600;
+    display: inline-block;
+`;
+
+const badgeRatingLight = css`
+    color: #d97706;
+`;
+
+const badgeRatingDark = css`
+    color: #f59e0b;
+`;
+
+const badgeStars = css`
+    margin-left: 4px;
+`;
+
+const badgeStarsContainer = css`
+    position: relative;
+    font-size: 20px;
+    line-height: 1;
+    padding: 0;
+    margin: 0;
+`;
+
+const badgeStarsFilled = css`
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    color: #f8af0d;
+`;
+
+const badgeStarsEmpty = css`
+    display: flex;
+    align-items: center;
+    color: #d1d5db;
+`;
+
+const badgeLinkContainer = css`
+    font-size: 12px;
+    margin-top: 8px;
+`;
+
+const badgeLink = css`
+    &:hover {
+        text-decoration: underline;
+    }
+`;
+
+const badgeLinkLight = css`
+    color: #6b7280;
+`;
+
+const badgeLinkDark = css`
+    color: #9ca3af;
+`;
+
+const badgeLinkInline = css`
+    display: inline-block;
+`;
 
 export const Badge: FC<{
     averageRating: number;
@@ -19,127 +140,78 @@ export const Badge: FC<{
     }, [averageRating]);
 
     return (
-        <div className="badge">
+        <div css={badge}>
             <div
-                className={clsx(
-                    "badge__container",
+                css={[
+                    badgeContainer,
                     theme === "light"
-                        ? "badge__container--light"
-                        : "badge__container--dark"
-                )}
+                        ? badgeContainerLight
+                        : badgeContainerDark,
+                ]}
             >
-                <div>
-                    <svg
-                        viewBox="0 0 512 512"
-                        width="44"
-                        height="44"
-                        aria-label="Google logo"
-                    >
-                        <g
-                            id="logo-g"
-                            height="44"
-                            width="44"
-                            fill="none"
-                            fillRule="evenodd"
-                            className="h-8 w-8"
-                        >
-                            <path
-                                d="M482.56 261.36c0-16.73-1.5-32.83-4.29-48.27H256v91.29h127.01c-5.47 29.5-22.1 54.49-47.09 71.23v59.21h76.27c44.63-41.09 70.37-101.59 70.37-173.46z"
-                                fill="#4285f4"
-                            ></path>
-                            <path
-                                d="M256 492c63.72 0 117.14-21.13 156.19-57.18l-76.27-59.21c-21.13 14.16-48.17 22.53-79.92 22.53-61.47 0-113.49-41.51-132.05-97.3H45.1v61.15c38.83 77.13 118.64 130.01 210.9 130.01z"
-                                fill="#34a853"
-                            ></path>
-                            <path
-                                d="M123.95 300.84c-4.72-14.16-7.4-29.29-7.4-44.84s2.68-30.68 7.4-44.84V150.01H45.1C29.12 181.87 20 217.92 20 256c0 38.08 9.12 74.13 25.1 105.99l78.85-61.15z"
-                                fill="#fbbc05"
-                            ></path>
-                            <path
-                                d="M256 113.86c34.65 0 65.76 11.91 90.22 35.29l67.69-67.69C373.03 43.39 319.61 20 256 20c-92.25 0-172.07 52.89-210.9 130.01l78.85 61.15c18.56-55.78 70.59-97.3 132.05-97.3z"
-                                fill="#ea4335"
-                            ></path>
-                            <path d="M20 20h472v472H20V20z"></path>
-                        </g>
-                    </svg>
-                </div>
-                <div className="badge__subcontainer">
+                <GoogleIcon css={badgeGoogleIcon} />
+                <div css={badgeInnerContainer}>
                     <span
-                        className={clsx(
-                            "badge__label",
+                        css={[
+                            badgeLabel,
                             theme === "light"
-                                ? "badge__label--light"
-                                : "badge__label--dark"
-                        )}
+                                ? badgeLabelLight
+                                : badgeLabelDark,
+                        ]}
                     >
                         Google Rating
                     </span>
-                    <div className="badge__rating__container">
+                    <div css={badgeRatingContainer}>
                         <span
-                            className={clsx(
-                                "badge__rating",
+                            css={[
+                                badgeRating,
                                 theme === "light"
-                                    ? "badge__rating--light"
-                                    : "badge__rating--dark"
-                            )}
+                                    ? badgeRatingLight
+                                    : badgeRatingDark,
+                            ]}
                         >
                             {averageRating.toFixed(1)}
                         </span>
-                        <div
-                            className={"badge__stars"}
-                            aria-hidden="true"
-                        >
-                            <div
-                                className={"badge__stars__container"}
-                            >
+                        <div css={badgeStars} aria-hidden="true">
+                            <div css={badgeStarsContainer}>
                                 <div
-                                    className={"badge__stars__fill"}
+                                    css={badgeStarsFilled}
                                     style={{
                                         width: `${percentageFill}%`,
                                     }}
                                 >
-                                    <span
-                                        style={{ color: "#F8AF0D" }}
-                                    >
-                                        ★★★★★
-                                    </span>
+                                    <span>★★★★★</span>
                                 </div>
-                                <div
-                                    className={"badge__stars__empty"}
-                                >
-                                    <span
-                                        style={{ color: "#d1d5db" }}
-                                    >
-                                        ★★★★★
-                                    </span>
+                                <div css={badgeStarsEmpty}>
+                                    <span>★★★★★</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className={"badge__link__container"}>
+                    <div css={badgeLinkContainer}>
                         {profileUrl ? (
                             <a
                                 target="_blank"
                                 rel="nofollow noopener noreferrer"
                                 href={profileUrl}
-                                className={clsx(
-                                    "badge__link",
+                                css={[
+                                    badgeLink,
                                     theme === "light"
-                                        ? "badge__link--light"
-                                        : "badge__link--dark"
-                                )}
+                                        ? badgeLinkLight
+                                        : badgeLinkDark,
+                                ]}
                             >
                                 Read our {totalReviewCount} reviews
                             </a>
                         ) : (
                             <span
-                                className={clsx(
-                                    "badge__link",
-                                    "badge__link--inline",
+                                css={[
+                                    badgeLink,
+                                    badgeLinkInline,
                                     theme === "light"
-                                        ? "badge__link--light"
-                                        : "badge__link--dark"
-                                )}
+                                        ? badgeLinkLight
+                                        : badgeLinkDark,
+                                ]}
                             >
                                 Read our {totalReviewCount} reviews
                             </span>

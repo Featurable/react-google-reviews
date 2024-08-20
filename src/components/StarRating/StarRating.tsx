@@ -1,27 +1,40 @@
-import clsx from "clsx";
-import React, { FC } from "react";
+/** @jsxImportSource @emotion/react */
+
+import { css } from "@emotion/react";
+import { FC } from "react";
 import { StarIcon } from "./StarIcon";
+
+const starRating = css`
+    display: flex;
+    align-items: center;
+`;
+
+const star = css`
+    height: 20px;
+    width: 20px;
+`;
+
+const starFilled = css`
+    color: #f8af0d;
+`;
+
+const starEmpty = css`
+    color: #6b7280;
+`;
 
 export const StarRating: FC<{
     rating: number;
     className?: string;
-    size?: "sm" | "md" | "lg" | "xl";
-}> = ({ className, rating, size = "md" }) => {
+}> = ({ rating }) => {
     return (
-        <div className={"starRating"}>
+        <div css={starRating}>
             {Array.from({ length: 5 }).map((_, i) => (
                 <StarIcon
                     key={i}
-                    className={clsx(
-                        size === "sm" && "star--sm",
-                        size === "md" && "star--md",
-                        size === "lg" && "star--lg",
-                        size === "xl" && "star--xl",
-                        className,
-                        rating >= i + 1
-                            ? "star--filled"
-                            : "star--empty"
-                    )}
+                    css={[
+                        star,
+                        rating >= i + 1 ? starFilled : starEmpty,
+                    ]}
                 />
             ))}
         </div>

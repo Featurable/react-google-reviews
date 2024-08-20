@@ -1,6 +1,13 @@
-import React, { FC } from "react";
+/** @jsxImportSource @emotion/react */
 
-export const GoogleLogo: FC<{
+import { css } from "@emotion/react";
+import React from "react";
+
+const googleLogo = css`
+    height: 32px;
+`;
+
+export const GoogleLogo: React.FC<{
     className?: string;
 }> = ({ className }) => {
     return (
@@ -8,6 +15,7 @@ export const GoogleLogo: FC<{
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 272 92"
             className={className}
+            css={googleLogo}
         >
             <path
                 fill="#EA4335"

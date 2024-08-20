@@ -1,8 +1,8 @@
-import clsx from "clsx";
+/** @jsxImportSource @emotion/react */
+
+import { css } from "@emotion/react";
 import React, { FC, useMemo } from "react";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
 import {
     DateDisplay,
     GoogleReview,
@@ -13,9 +13,71 @@ import {
 } from "../../types/review";
 import { ReviewCard } from "../ReviewCard/ReviewCard";
 
+const carousel = css`
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 40px 32px;
+    position: relative;
+`;
+
+const carouselBtn = css`
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    transition: all;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+`;
+
+const carouselBtnLeft = css`
+    left: 0;
+`;
+const carouselBtnRight = css`
+    right: 0;
+`;
+const carouselBtnLight = css`
+    background: white;
+    color: hsl(0, 0%, 20%);
+    border: 1px solid hsl(0, 0%, 80%);
+
+    &:hover {
+        background: hsl(0, 0%, 95%);
+        border: 1px solid hsl(0, 0%, 80%);
+    }
+`;
+const carouselBtnDark = css`
+    background: #111827;
+    color: hsl(0, 0%, 20%);
+    border: 1px solid #374151
+
+    &:hover {
+        background: #0b0f19;
+        border: 1px solid #272e3a;
+    }
+`;
+
+const carouselBtnIcon = css`
+    width: 24px;
+    height: 24px;
+`;
+
+const carouselCard = css`
+    padding: 8px;
+    box-sizing: border-box;
+`;
+
 export const Carousel: FC<{
     reviews: GoogleReview[];
-
     maxCharacters?: number;
     nameDisplay?: NameDisplay;
     logoVariant?: LogoVariant;
@@ -51,21 +113,19 @@ export const Carousel: FC<{
 
     return (
         <div
-            className={"carousel"}
+            css={carousel}
             role="region"
             aria-label="Customer Reviews Carousel"
         >
             <button
                 onClick={() => slider?.current?.slickPrev()}
-                className={clsx(
-                    "carousel__btn carousel__btn--left",
+                css={[
+                    carouselBtn,
+                    carouselBtnLeft,
                     theme === "light"
-                        ? "carousel__btn--light"
-                        : "carousel__btn--dark"
-                )}
-                style={{
-                    transform: "translateY(-50%)",
-                }}
+                        ? carouselBtnLight
+                        : carouselBtnDark,
+                ]}
                 role="button"
                 aria-description="Previous Review"
             >
@@ -75,7 +135,7 @@ export const Carousel: FC<{
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="carousel__btn__icon"
+                    css={carouselBtnIcon}
                 >
                     <path
                         strokeLinecap="round"
@@ -86,15 +146,13 @@ export const Carousel: FC<{
             </button>
             <button
                 onClick={() => slider?.current?.slickNext()}
-                className={clsx(
-                    "carousel__btn carousel__btn--right",
+                css={[
+                    carouselBtn,
+                    carouselBtnRight,
                     theme === "light"
-                        ? "carousel__btn--light"
-                        : "carousel__btn--dark"
-                )}
-                style={{
-                    transform: "translateY(-50%)",
-                }}
+                        ? carouselBtnLight
+                        : carouselBtnDark,
+                ]}
                 role="button"
                 aria-description="Next Review"
             >
@@ -104,7 +162,7 @@ export const Carousel: FC<{
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="carousel__btn__icon"
+                    css={carouselBtnIcon}
                 >
                     <path
                         strokeLinecap="round"
@@ -165,7 +223,7 @@ export const Carousel: FC<{
                 {reviews.map((review, index) => {
                     return (
                         <div
-                            className="carousel__card"
+                            css={carouselCard}
                             key={review.reviewId ?? review.comment}
                             tabIndex={index === 0 ? 0 : -1}
                             aria-label={`Review ${index + 1}`}
