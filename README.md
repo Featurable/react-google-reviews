@@ -76,6 +76,9 @@ Prerequisites:
 2. Create a new Featurable widget
 3. Click Embed > API and copy the widget ID
 
+> [!NOTE]
+> The Featurable API is free to use and provides additional features like caching, automatic updates, and more reviews. To prevent abuse, the Featurable API is subject to rate limits. 
+
 ![Copy Featurable Widget ID](public/images/featurable-widget-id.png)
 
 ```jsx
