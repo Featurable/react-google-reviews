@@ -7,11 +7,11 @@
 <div align="center">
   <strong>Making adding Google reviews to any React app beautiful, easy, and free!</strong><br />
   <br />
-  <a href="https://github.com/ryanschiang/react-google-reviews/issues/new?assignees=&labels=Type%3A+Bug&template=01_bug_report.yml&title=bug%3A+">Report a Bug</a>
+  <a href="https://github.com/Featurable/react-google-reviews/issues/new?assignees=&labels=Type%3A+Bug&template=01_bug_report.yml&title=bug%3A+">Report a Bug</a>
   -
-  <a href="https://github.com/ryanschiang/react-google-reviews/issues/new?assignees=&labels=Type%3A+Feature&template=02_feature_request.yml&title=feat%3A+">Request a Feature</a>
+  <a href="https://github.com/Featurable/react-google-reviews/issues/new?assignees=&labels=Type%3A+Feature&template=02_feature_request.yml&title=feat%3A+">Request a Feature</a>
   -
-  <a href="https://github.com/ryanschiang/react-google-reviews/issues/new?assignees=&labels=Type%3A+Question&template=03_support_question.yml&title=support%3A+">Ask a Question</a>
+  <a href="https://github.com/Featurable/react-google-reviews/issues/new?assignees=&labels=Type%3A+Question&template=03_support_question.yml&title=support%3A+">Ask a Question</a>
 </div>
 
 <div align="center">
@@ -19,10 +19,10 @@
 <br />
 
 [![npm](https://img.shields.io/npm/v/react-google-reviews?style=flat-square)](https://www.npmjs.com/package/react-google-reviews)
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/ryanschiang/react-google-reviews?sort=semver&style=flat-square)](https://github.com/ryanschiang/react-google-reviews/releases)
-[![Release Date](https://img.shields.io/github/release-date/ryanschiang/react-google-reviews?style=flat-square)](https://github.com/ryanschiang/ryanschiang/releases/latest)
-[![License: MIT](https://img.shields.io/badge/license-%20MIT-blue?style=flat-square&logo=gnu)](https://github.com/ryanschiang/react-google-reviews/blob/main/LICENSE)
-[![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/ryanschiang/react-google-reviews/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22%2C%22Status%3A+Available%22+sort%3Aupdated-desc+)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/Featurable/react-google-reviews?sort=semver&style=flat-square)](https://github.com/Featurable/react-google-reviews/releases)
+[![Release Date](https://img.shields.io/github/release-date/Featurable/react-google-reviews?style=flat-square)](https://github.com/Featurable/react-google-reviews/releases/latest)
+[![License: MIT](https://img.shields.io/badge/license-%20MIT-blue?style=flat-square&logo=gnu)](https://github.com/Featurable/react-google-reviews/blob/main/LICENSE)
+[![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/Featurable/react-google-reviews/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22%2C%22Status%3A+Available%22+sort%3Aupdated-desc+)
 
 </div>
 
@@ -42,7 +42,7 @@ documentation can also be found at
 
 **What is it?** React component to display Google reviews on your website. This library is built with React and uses the Google Places API -or- the free Featurable API to fetch and display Google reviews on your website.
 
-Documentation and examples at [https://featurable.com/docs/react-google-reviews](https://featurable.com/docs/react-google-reviews). Source code at [https://github.com/ryanschiang/react-google-reviews](https://github.com/ryanschiang/react-google-reviews).
+Documentation and examples at [https://featurable.com/docs/react-google-reviews](https://featurable.com/docs/react-google-reviews). Source code at [https://github.com/Featurable/react-google-reviews](https://github.com/Featurable/react-google-reviews).
 
 ## Demo
 
