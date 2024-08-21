@@ -5,7 +5,7 @@
 ![React Google Reviews Integration by Featurable](public/images/react-google-reviews.jpg)
 
 <div align="center">
-  <strong>Making adding Google reviews to any website beautiful, easy, and free!</strong><br />
+  <strong>Making adding Google reviews to any React app beautiful, easy, and free!</strong><br />
   <br />
   <a href="https://github.com/ryanschiang/react-google-reviews/issues/new?assignees=&labels=Type%3A+Bug&template=01_bug_report.yml&title=bug%3A+">Report a Bug</a>
   -
@@ -85,7 +85,7 @@ import "react-google-reviews/dist/index.css";
 function Reviews() {
   // Create a free Featurable account at https://featurable.com
   // Then create a new Featurable widget and copy the widget ID
-  const featurableWidgetId = "842ncdd8-0f40-438d-9c...";
+  const featurableWidgetId = "842ncdd8-0f40-438d-9c..."; // You can use "example" for testing
 
   return (
     <ReactGoogleReviews layout="carousel" featurableId={featurableWidgetId} />
@@ -167,9 +167,32 @@ There are three layout options currently available:
 
 ### CSS Styling
 
-The component uses BEM (Block Element Modifier) CSS classes for styling. You can override the default styles by importing the CSS file and adding your own styles.
+For the carousel widget to work correctly, you must include the CSS file in your project:
 
-Please see the documentation for a list of CSS classes and examples of how to style the component.
+```jsx
+import "react-google-reviews/dist/index.css";
+```
+
+To override the default styles, you can use the CSS props to add custom styles:
+
+```jsx
+<style>
+{`
+.read-more {
+  color: blue;
+}
+`}
+</style>
+
+<ReactGoogleReviews 
+  layout="carousel"
+  id="example"
+  reviewReadMoreClassName="read-more"
+  reviewReadMoreStyle={{ color: "blue" }}
+/>
+```
+
+Please see the documentation for a list of CSS properties and examples of how to style the component.
 
 [View CSS classes and examples](https://featurable.com/docs/react-google-reviews#css-classes)
 
