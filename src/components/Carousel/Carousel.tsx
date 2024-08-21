@@ -1,8 +1,13 @@
 /** @jsxImportSource @emotion/react */
 
 import { css } from "@emotion/react";
+import clsx from "clsx";
 import React, { FC, useMemo } from "react";
 import Slider from "react-slick";
+import {
+    CarouselCSSProps,
+    ReviewCardCSSProps,
+} from "../../types/cssProps";
 import {
     DateDisplay,
     GoogleReview,
@@ -76,7 +81,7 @@ const carouselCard = css`
     box-sizing: border-box;
 `;
 
-export const Carousel: FC<{
+type CarouselProps = {
     reviews: GoogleReview[];
     maxCharacters?: number;
     nameDisplay?: NameDisplay;
@@ -88,7 +93,11 @@ export const Carousel: FC<{
     maxItems?: number;
     theme?: Theme;
     accessibility?: boolean;
-}> = ({
+};
+
+export const Carousel: FC<
+    CarouselProps & CarouselCSSProps & ReviewCardCSSProps
+> = ({
     reviews,
     maxCharacters = 200,
     nameDisplay = "firstAndLastInitials",
@@ -100,6 +109,68 @@ export const Carousel: FC<{
     maxItems = 3,
     theme = "light",
     accessibility = true,
+
+    carouselClassName,
+    carouselStyle,
+    carouselBtnClassName,
+    carouselBtnStyle,
+    carouselBtnLeftClassName,
+    carouselBtnLeftStyle,
+    carouselBtnRightClassName,
+    carouselBtnRightStyle,
+    carouselBtnLightClassName,
+    carouselBtnLightStyle,
+    carouselBtnDarkClassName,
+    carouselBtnDarkStyle,
+    carouselBtnIconClassName,
+    carouselBtnIconStyle,
+    carouselCardClassName,
+    carouselCardStyle,
+
+    reviewCardClassName,
+    reviewCardStyle,
+    reviewCardLightClassName,
+    reviewCardLightStyle,
+    reviewCardDarkClassName,
+    reviewCardDarkStyle,
+    reviewBodyCardClassName,
+    reviewBodyCardStyle,
+    reviewBodyTestimonialClassName,
+    reviewBodyTestimonialStyle,
+    reviewTextClassName,
+    reviewTextStyle,
+    reviewTextLightClassName,
+    reviewTextLightStyle,
+    reviewTextDarkClassName,
+    reviewTextDarkStyle,
+    reviewReadMoreClassName,
+    reviewReadMoreStyle,
+    reviewReadMoreLightClassName,
+    reviewReadMoreLightStyle,
+    reviewReadMoreDarkClassName,
+    reviewReadMoreDarkStyle,
+    reviewFooterClassName,
+    reviewFooterStyle,
+    reviewerClassName,
+    reviewerStyle,
+    reviewerProfileClassName,
+    reviewerProfileStyle,
+    reviewerProfileImageClassName,
+    reviewerProfileImageStyle,
+    reviewerProfileFallbackClassName,
+    reviewerProfileFallbackStyle,
+    reviewerNameClassName,
+    reviewerNameStyle,
+    reviewerNameLightClassName,
+    reviewerNameLightStyle,
+    reviewerNameDarkClassName,
+    reviewerNameDarkStyle,
+    reviewerDateClassName,
+    reviewerDateStyle,
+    reviewerDateLightClassName,
+    reviewerDateLightStyle,
+    reviewerDateDarkClassName,
+    reviewerDateDarkStyle,
 }) => {
     const slider = React.useRef<Slider>(null);
 
@@ -116,6 +187,8 @@ export const Carousel: FC<{
             css={carousel}
             role="region"
             aria-label="Customer Reviews Carousel"
+            className={carouselClassName}
+            style={carouselStyle}
         >
             <button
                 onClick={() => slider?.current?.slickPrev()}
@@ -128,6 +201,20 @@ export const Carousel: FC<{
                 ]}
                 role="button"
                 aria-description="Previous Review"
+                className={clsx(
+                    carouselBtnClassName,
+                    carouselBtnLeftClassName,
+                    theme === "light"
+                        ? carouselBtnLightClassName
+                        : carouselBtnDarkClassName
+                )}
+                style={{
+                    ...carouselBtnStyle,
+                    ...carouselBtnLeftStyle,
+                    ...(theme === "light"
+                        ? carouselBtnLightStyle
+                        : carouselBtnDarkStyle),
+                }}
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -136,6 +223,8 @@ export const Carousel: FC<{
                     strokeWidth={1.5}
                     stroke="currentColor"
                     css={carouselBtnIcon}
+                    className={carouselBtnIconClassName}
+                    style={carouselBtnIconStyle}
                 >
                     <path
                         strokeLinecap="round"
@@ -155,6 +244,20 @@ export const Carousel: FC<{
                 ]}
                 role="button"
                 aria-description="Next Review"
+                className={clsx(
+                    carouselBtnClassName,
+                    carouselBtnRightClassName,
+                    theme === "light"
+                        ? carouselBtnLightClassName
+                        : carouselBtnDarkClassName
+                )}
+                style={{
+                    ...carouselBtnStyle,
+                    ...carouselBtnRightStyle,
+                    ...(theme === "light"
+                        ? carouselBtnLightStyle
+                        : carouselBtnDarkStyle),
+                }}
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -163,6 +266,8 @@ export const Carousel: FC<{
                     strokeWidth={1.5}
                     stroke="currentColor"
                     css={carouselBtnIcon}
+                    className={carouselBtnIconClassName}
+                    style={carouselBtnIconStyle}
                 >
                     <path
                         strokeLinecap="round"
@@ -227,6 +332,8 @@ export const Carousel: FC<{
                             key={review.reviewId ?? review.comment}
                             tabIndex={index === 0 ? 0 : -1}
                             aria-label={`Review ${index + 1}`}
+                            className={carouselCardClassName}
+                            style={carouselCardStyle}
                         >
                             <ReviewCard
                                 review={review}
@@ -236,6 +343,124 @@ export const Carousel: FC<{
                                 dateDisplay={dateDisplay}
                                 reviewVariant={reviewVariant}
                                 theme={theme}
+                                reviewCardClassName={
+                                    reviewCardClassName
+                                }
+                                reviewCardStyle={reviewCardStyle}
+                                reviewCardLightClassName={
+                                    reviewCardLightClassName
+                                }
+                                reviewCardLightStyle={
+                                    reviewCardLightStyle
+                                }
+                                reviewCardDarkClassName={
+                                    reviewCardDarkClassName
+                                }
+                                reviewCardDarkStyle={
+                                    reviewCardDarkStyle
+                                }
+                                reviewBodyCardClassName={
+                                    reviewBodyCardClassName
+                                }
+                                reviewBodyCardStyle={
+                                    reviewBodyCardStyle
+                                }
+                                reviewBodyTestimonialClassName={
+                                    reviewBodyTestimonialClassName
+                                }
+                                reviewBodyTestimonialStyle={
+                                    reviewBodyTestimonialStyle
+                                }
+                                reviewTextClassName={
+                                    reviewTextClassName
+                                }
+                                reviewTextStyle={reviewTextStyle}
+                                reviewTextLightClassName={
+                                    reviewTextLightClassName
+                                }
+                                reviewTextLightStyle={
+                                    reviewTextLightStyle
+                                }
+                                reviewTextDarkClassName={
+                                    reviewTextDarkClassName
+                                }
+                                reviewTextDarkStyle={
+                                    reviewTextDarkStyle
+                                }
+                                reviewReadMoreClassName={
+                                    reviewReadMoreClassName
+                                }
+                                reviewReadMoreStyle={
+                                    reviewReadMoreStyle
+                                }
+                                reviewReadMoreLightClassName={
+                                    reviewReadMoreLightClassName
+                                }
+                                reviewReadMoreLightStyle={
+                                    reviewReadMoreLightStyle
+                                }
+                                reviewReadMoreDarkClassName={
+                                    reviewReadMoreDarkClassName
+                                }
+                                reviewReadMoreDarkStyle={
+                                    reviewReadMoreDarkStyle
+                                }
+                                reviewFooterClassName={
+                                    reviewFooterClassName
+                                }
+                                reviewFooterStyle={reviewFooterStyle}
+                                reviewerClassName={reviewerClassName}
+                                reviewerStyle={reviewerStyle}
+                                reviewerProfileClassName={
+                                    reviewerProfileClassName
+                                }
+                                reviewerProfileStyle={
+                                    reviewerProfileStyle
+                                }
+                                reviewerProfileImageClassName={
+                                    reviewerProfileImageClassName
+                                }
+                                reviewerProfileImageStyle={
+                                    reviewerProfileImageStyle
+                                }
+                                reviewerProfileFallbackClassName={
+                                    reviewerProfileFallbackClassName
+                                }
+                                reviewerProfileFallbackStyle={
+                                    reviewerProfileFallbackStyle
+                                }
+                                reviewerNameClassName={
+                                    reviewerNameClassName
+                                }
+                                reviewerNameStyle={reviewerNameStyle}
+                                reviewerNameLightClassName={
+                                    reviewerNameLightClassName
+                                }
+                                reviewerNameLightStyle={
+                                    reviewerNameLightStyle
+                                }
+                                reviewerNameDarkClassName={
+                                    reviewerNameDarkClassName
+                                }
+                                reviewerNameDarkStyle={
+                                    reviewerNameDarkStyle
+                                }
+                                reviewerDateClassName={
+                                    reviewerDateClassName
+                                }
+                                reviewerDateStyle={reviewerDateStyle}
+                                reviewerDateLightClassName={
+                                    reviewerDateLightClassName
+                                }
+                                reviewerDateLightStyle={
+                                    reviewerDateLightStyle
+                                }
+                                reviewerDateDarkClassName={
+                                    reviewerDateDarkClassName
+                                }
+                                reviewerDateDarkStyle={
+                                    reviewerDateDarkStyle
+                                }
                             />
                         </div>
                     );

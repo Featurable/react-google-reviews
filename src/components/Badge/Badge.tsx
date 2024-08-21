@@ -1,7 +1,9 @@
 /** @jsxImportSource @emotion/react */
 
 import { css } from "@emotion/react";
+import clsx from "clsx";
 import { FC, useMemo } from "react";
+import { BadgeCSSProps } from "../../types/cssProps";
 import { Theme } from "../../types/review";
 import { GoogleIcon } from "../Google/GoogleIcon";
 
@@ -37,11 +39,13 @@ const badgeGoogleIcon = css`
 
 const badgeInnerContainer = css`
     padding-left: 1rem;
+    line-height: normal;
 `;
 
 const badgeLabel = css`
     font-size: 1rem;
     font-weight: 500;
+    line-height: 1;
 `;
 
 const badgeLabelLight = css`
@@ -123,16 +127,62 @@ const badgeLinkInline = css`
     display: inline-block;
 `;
 
-export const Badge: FC<{
+type BadgeProps = {
     averageRating: number;
     totalReviewCount: number;
     profileUrl?: string | null;
     theme?: Theme;
-}> = ({
+};
+
+export const Badge: FC<BadgeProps & BadgeCSSProps> = ({
     averageRating,
     totalReviewCount,
     profileUrl,
     theme = "light",
+    badgeClassName,
+    badgeStyle,
+    badgeContainerClassName,
+    badgeContainerStyle,
+    badgeContainerLightClassName,
+    badgeContainerLightStyle,
+    badgeContainerDarkClassName,
+    badgeContainerDarkStyle,
+    badgeGoogleIconClassName,
+    badgeGoogleIconStyle,
+    badgeInnerContainerClassName,
+    badgeInnerContainerStyle,
+    badgeLabelClassName,
+    badgeLabelStyle,
+    badgeLabelLightClassName,
+    badgeLabelLightStyle,
+    badgeLabelDarkClassName,
+    badgeLabelDarkStyle,
+    badgeRatingContainerClassName,
+    badgeRatingContainerStyle,
+    badgeRatingClassName,
+    badgeRatingStyle,
+    badgeRatingLightClassName,
+    badgeRatingLightStyle,
+    badgeRatingDarkClassName,
+    badgeRatingDarkStyle,
+    badgeStarsClassName,
+    badgeStarsStyle,
+    badgeStarsContainerClassName,
+    badgeStarsContainerStyle,
+    badgeStarsFilledClassName,
+    badgeStarsFilledStyle,
+    badgeStarsEmptyClassName,
+    badgeStarsEmptyStyle,
+    badgeLinkContainerClassName,
+    badgeLinkContainerStyle,
+    badgeLinkClassName,
+    badgeLinkStyle,
+    badgeLinkLightClassName,
+    badgeLinkLightStyle,
+    badgeLinkDarkClassName,
+    badgeLinkDarkStyle,
+    badgeLinkInlineClassName,
+    badgeLinkInlineStyle,
 }) => {
     const percentageFill = useMemo(() => {
         const pct = (averageRating / 5) * 100;
@@ -140,7 +190,11 @@ export const Badge: FC<{
     }, [averageRating]);
 
     return (
-        <div css={badge}>
+        <div
+            css={badge}
+            className={badgeClassName}
+            style={badgeStyle}
+        >
             <div
                 css={[
                     badgeContainer,
@@ -148,9 +202,29 @@ export const Badge: FC<{
                         ? badgeContainerLight
                         : badgeContainerDark,
                 ]}
+                className={clsx(
+                    badgeContainerClassName,
+                    theme === "light"
+                        ? badgeContainerLightClassName
+                        : badgeContainerDarkClassName
+                )}
+                style={{
+                    ...badgeContainerStyle,
+                    ...(theme === "light"
+                        ? badgeContainerLightStyle
+                        : badgeContainerDarkStyle),
+                }}
             >
-                <GoogleIcon css={badgeGoogleIcon} />
-                <div css={badgeInnerContainer}>
+                <GoogleIcon
+                    css={badgeGoogleIcon}
+                    className={badgeGoogleIconClassName}
+                    style={badgeGoogleIconStyle}
+                />
+                <div
+                    css={badgeInnerContainer}
+                    className={badgeInnerContainerClassName}
+                    style={badgeInnerContainerStyle}
+                >
                     <span
                         css={[
                             badgeLabel,
@@ -158,10 +232,26 @@ export const Badge: FC<{
                                 ? badgeLabelLight
                                 : badgeLabelDark,
                         ]}
+                        className={clsx(
+                            badgeLabelClassName,
+                            theme === "light"
+                                ? badgeLabelLightClassName
+                                : badgeLabelDarkClassName
+                        )}
+                        style={{
+                            ...badgeLabelStyle,
+                            ...(theme === "light"
+                                ? badgeLabelLightStyle
+                                : badgeLabelDarkStyle),
+                        }}
                     >
                         Google Rating
                     </span>
-                    <div css={badgeRatingContainer}>
+                    <div
+                        css={badgeRatingContainer}
+                        className={badgeRatingContainerClassName}
+                        style={badgeRatingContainerStyle}
+                    >
                         <span
                             css={[
                                 badgeRating,
@@ -169,26 +259,63 @@ export const Badge: FC<{
                                     ? badgeRatingLight
                                     : badgeRatingDark,
                             ]}
+                            className={clsx(
+                                badgeRatingClassName,
+                                theme === "light"
+                                    ? badgeRatingLightClassName
+                                    : badgeRatingDarkClassName
+                            )}
+                            style={{
+                                ...badgeRatingStyle,
+                                ...(theme === "light"
+                                    ? badgeRatingLightStyle
+                                    : badgeRatingDarkStyle),
+                            }}
                         >
                             {averageRating.toFixed(1)}
                         </span>
-                        <div css={badgeStars} aria-hidden="true">
-                            <div css={badgeStarsContainer}>
+                        <div
+                            css={badgeStars}
+                            aria-hidden="true"
+                            className={badgeStarsClassName}
+                            style={badgeStarsStyle}
+                        >
+                            <div
+                                css={badgeStarsContainer}
+                                className={
+                                    badgeStarsContainerClassName
+                                }
+                                style={badgeStarsContainerStyle}
+                            >
                                 <div
                                     css={badgeStarsFilled}
+                                    className={
+                                        badgeStarsFilledClassName
+                                    }
                                     style={{
                                         width: `${percentageFill}%`,
+                                        ...badgeStarsFilledStyle,
                                     }}
                                 >
                                     <span>★★★★★</span>
                                 </div>
-                                <div css={badgeStarsEmpty}>
+                                <div
+                                    css={badgeStarsEmpty}
+                                    className={
+                                        badgeStarsEmptyClassName
+                                    }
+                                    style={badgeStarsEmptyStyle}
+                                >
                                     <span>★★★★★</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div css={badgeLinkContainer}>
+                    <div
+                        css={badgeLinkContainer}
+                        className={badgeLinkContainerClassName}
+                        style={badgeLinkContainerStyle}
+                    >
                         {profileUrl ? (
                             <a
                                 target="_blank"
@@ -200,6 +327,20 @@ export const Badge: FC<{
                                         ? badgeLinkLight
                                         : badgeLinkDark,
                                 ]}
+                                className={clsx(
+                                    badgeLinkClassName,
+                                    theme === "light"
+                                        ? badgeLinkLightClassName
+                                        : badgeLinkDarkClassName,
+                                    badgeLinkInlineClassName
+                                )}
+                                style={{
+                                    ...badgeLinkStyle,
+                                    ...(theme === "light"
+                                        ? badgeLinkLightStyle
+                                        : badgeLinkDarkStyle),
+                                    ...badgeLinkInlineStyle,
+                                }}
                             >
                                 Read our {totalReviewCount} reviews
                             </a>
@@ -212,6 +353,20 @@ export const Badge: FC<{
                                         ? badgeLinkLight
                                         : badgeLinkDark,
                                 ]}
+                                className={clsx(
+                                    badgeLinkClassName,
+                                    badgeLinkInlineClassName,
+                                    theme === "light"
+                                        ? badgeLinkLightClassName
+                                        : badgeLinkDarkClassName
+                                )}
+                                style={{
+                                    ...badgeLinkStyle,
+                                    ...badgeLinkInlineStyle,
+                                    ...(theme === "light"
+                                        ? badgeLinkLightStyle
+                                        : badgeLinkDarkStyle),
+                                }}
                             >
                                 Read our {totalReviewCount} reviews
                             </span>

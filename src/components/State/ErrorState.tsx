@@ -2,6 +2,7 @@
 
 import { css } from "@emotion/react";
 import { FC } from "react";
+import { ErrorStateCSSProps } from "../../types/cssProps";
 
 const error = css`
     padding-top: 64px;
@@ -13,9 +14,16 @@ const error = css`
         "Segoe UI Emoji", "Segoe UI Symbol";
 `;
 
-export const ErrorState: FC<{}> = () => {
+export const ErrorState: FC<ErrorStateCSSProps> = ({
+    errorClassName,
+    errorStyle,
+}) => {
     return (
-        <div css={error}>
+        <div
+            css={error}
+            className={errorClassName}
+            style={errorStyle}
+        >
             Failed to load Google reviews. Please try again later.
         </div>
     );

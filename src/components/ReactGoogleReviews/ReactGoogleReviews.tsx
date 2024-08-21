@@ -4,6 +4,13 @@ import { css } from "@emotion/react";
 import React, { useEffect, useState } from "react";
 import "../../css/index.css";
 import {
+    BadgeCSSProps,
+    CarouselCSSProps,
+    ErrorStateCSSProps,
+    LoadingStateCSSProps,
+    ReviewCardCSSProps,
+} from "../../types/cssProps";
+import {
     DateDisplay,
     FeaturableAPIResponse,
     GoogleReview,
@@ -146,7 +153,9 @@ type ReactGoogleReviewsBasePropsWithRequired =
         (
             | ReactGoogleReviewsWithPlaceIdProps
             | ReactGoogleReviewsWithFeaturableIdProps
-        );
+        ) &
+        ErrorStateCSSProps &
+        LoadingStateCSSProps;
 
 type ReactGoogleReviewsCarouselProps =
     ReactGoogleReviewsBasePropsWithRequired & {
@@ -168,7 +177,8 @@ type ReactGoogleReviewsCarouselProps =
          * Default: 3
          */
         maxItems?: number;
-    };
+    } & CarouselCSSProps &
+        ReviewCardCSSProps;
 
 type ReactGoogleReviewsBadgeProps =
     ReactGoogleReviewsBasePropsWithRequired & {
@@ -179,7 +189,7 @@ type ReactGoogleReviewsBadgeProps =
          * This is automatically fetched when passing `featurableId`.
          */
         profileUrl?: string;
-    };
+    } & BadgeCSSProps;
 
 type ReactGoogleReviewsCustomProps =
     ReactGoogleReviewsBasePropsWithRequired & {
@@ -261,7 +271,16 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
     }, [props.featurableId]);
 
     if (loading) {
-        return <LoadingState />;
+        return (
+            <LoadingState
+                loaderClassName={props.loaderClassName}
+                loaderStyle={props.loaderStyle}
+                loaderSpinnerClassName={props.loaderSpinnerClassName}
+                loaderSpinnerStyle={props.loaderSpinnerStyle}
+                loaderLabelClassName={props.loaderLabelClassName}
+                loaderLabelStyle={props.loaderLabelStyle}
+            />
+        );
     }
 
     if (
@@ -269,7 +288,12 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
         (props.layout === "badge" &&
             (averageRating === null || totalReviewCount === null))
     ) {
-        return <ErrorState />;
+        return (
+            <ErrorState
+                errorClassName={props.errorClassName}
+                errorStyle={props.errorStyle}
+            />
+        );
     }
 
     return (
@@ -325,6 +349,138 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
                     maxItems={props.maxItems}
                     theme={props.theme}
                     accessibility={props.accessibility}
+                    carouselClassName={props.carouselClassName}
+                    carouselStyle={props.carouselStyle}
+                    carouselBtnClassName={props.carouselBtnClassName}
+                    carouselBtnStyle={props.carouselBtnStyle}
+                    carouselBtnLeftClassName={
+                        props.carouselBtnLeftClassName
+                    }
+                    carouselBtnLeftStyle={props.carouselBtnLeftStyle}
+                    carouselBtnRightClassName={
+                        props.carouselBtnRightClassName
+                    }
+                    carouselBtnRightStyle={
+                        props.carouselBtnRightStyle
+                    }
+                    carouselBtnLightClassName={
+                        props.carouselBtnLightClassName
+                    }
+                    carouselBtnLightStyle={
+                        props.carouselBtnLightStyle
+                    }
+                    carouselBtnDarkClassName={
+                        props.carouselBtnDarkClassName
+                    }
+                    carouselBtnDarkStyle={props.carouselBtnDarkStyle}
+                    carouselBtnIconClassName={
+                        props.carouselBtnIconClassName
+                    }
+                    carouselBtnIconStyle={props.carouselBtnIconStyle}
+                    carouselCardClassName={
+                        props.carouselCardClassName
+                    }
+                    carouselCardStyle={props.carouselCardStyle}
+                    reviewCardClassName={props.reviewCardClassName}
+                    reviewCardStyle={props.reviewCardStyle}
+                    reviewCardLightClassName={
+                        props.reviewCardLightClassName
+                    }
+                    reviewCardLightStyle={props.reviewCardLightStyle}
+                    reviewCardDarkClassName={
+                        props.reviewCardDarkClassName
+                    }
+                    reviewCardDarkStyle={props.reviewCardDarkStyle}
+                    reviewBodyCardClassName={
+                        props.reviewBodyCardClassName
+                    }
+                    reviewBodyCardStyle={props.reviewBodyCardStyle}
+                    reviewBodyTestimonialClassName={
+                        props.reviewBodyTestimonialClassName
+                    }
+                    reviewBodyTestimonialStyle={
+                        props.reviewBodyTestimonialStyle
+                    }
+                    reviewTextClassName={props.reviewTextClassName}
+                    reviewTextStyle={props.reviewTextStyle}
+                    reviewTextLightClassName={
+                        props.reviewTextLightClassName
+                    }
+                    reviewTextLightStyle={props.reviewTextLightStyle}
+                    reviewTextDarkClassName={
+                        props.reviewTextDarkClassName
+                    }
+                    reviewTextDarkStyle={props.reviewTextDarkStyle}
+                    reviewReadMoreClassName={
+                        props.reviewReadMoreClassName
+                    }
+                    reviewReadMoreStyle={props.reviewReadMoreStyle}
+                    reviewReadMoreLightClassName={
+                        props.reviewReadMoreLightClassName
+                    }
+                    reviewReadMoreLightStyle={
+                        props.reviewReadMoreLightStyle
+                    }
+                    reviewReadMoreDarkClassName={
+                        props.reviewReadMoreDarkClassName
+                    }
+                    reviewReadMoreDarkStyle={
+                        props.reviewReadMoreDarkStyle
+                    }
+                    reviewFooterClassName={
+                        props.reviewFooterClassName
+                    }
+                    reviewFooterStyle={props.reviewFooterStyle}
+                    reviewerClassName={props.reviewerClassName}
+                    reviewerStyle={props.reviewerStyle}
+                    reviewerProfileClassName={
+                        props.reviewerProfileClassName
+                    }
+                    reviewerProfileStyle={props.reviewerProfileStyle}
+                    reviewerProfileImageClassName={
+                        props.reviewerProfileImageClassName
+                    }
+                    reviewerProfileImageStyle={
+                        props.reviewerProfileImageStyle
+                    }
+                    reviewerProfileFallbackClassName={
+                        props.reviewerProfileFallbackClassName
+                    }
+                    reviewerProfileFallbackStyle={
+                        props.reviewerProfileFallbackStyle
+                    }
+                    reviewerNameClassName={
+                        props.reviewerNameClassName
+                    }
+                    reviewerNameStyle={props.reviewerNameStyle}
+                    reviewerNameLightClassName={
+                        props.reviewerNameLightClassName
+                    }
+                    reviewerNameLightStyle={
+                        props.reviewerNameLightStyle
+                    }
+                    reviewerNameDarkClassName={
+                        props.reviewerNameDarkClassName
+                    }
+                    reviewerNameDarkStyle={
+                        props.reviewerNameDarkStyle
+                    }
+                    reviewerDateClassName={
+                        props.reviewerDateClassName
+                    }
+                    reviewerDateStyle={props.reviewerDateStyle}
+                    reviewerDateLightClassName={
+                        props.reviewerDateLightClassName
+                    }
+                    reviewerDateLightStyle={
+                        props.reviewerDateLightStyle
+                    }
+                    reviewerDateDarkClassName={
+                        props.reviewerDateDarkClassName
+                    }
+                    reviewerDateDarkStyle={
+                        props.reviewerDateDarkStyle
+                    }
                 />
             )}
 
@@ -334,6 +490,100 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
                     totalReviewCount={totalReviewCount!}
                     profileUrl={profileUrl}
                     theme={props.theme}
+                    badgeClassName={props.badgeClassName}
+                    badgeStyle={props.badgeStyle}
+                    badgeContainerClassName={
+                        props.badgeContainerClassName
+                    }
+                    badgeContainerStyle={props.badgeContainerStyle}
+                    badgeContainerLightClassName={
+                        props.badgeContainerLightClassName
+                    }
+                    badgeContainerLightStyle={
+                        props.badgeContainerLightStyle
+                    }
+                    badgeContainerDarkClassName={
+                        props.badgeContainerDarkClassName
+                    }
+                    badgeContainerDarkStyle={
+                        props.badgeContainerDarkStyle
+                    }
+                    badgeGoogleIconClassName={
+                        props.badgeGoogleIconClassName
+                    }
+                    badgeGoogleIconStyle={props.badgeGoogleIconStyle}
+                    badgeInnerContainerClassName={
+                        props.badgeInnerContainerClassName
+                    }
+                    badgeInnerContainerStyle={
+                        props.badgeInnerContainerStyle
+                    }
+                    badgeLabelClassName={props.badgeLabelClassName}
+                    badgeLabelStyle={props.badgeLabelStyle}
+                    badgeLabelLightClassName={
+                        props.badgeLabelLightClassName
+                    }
+                    badgeLabelLightStyle={props.badgeLabelLightStyle}
+                    badgeLabelDarkClassName={
+                        props.badgeLabelDarkClassName
+                    }
+                    badgeLabelDarkStyle={props.badgeLabelDarkStyle}
+                    badgeRatingContainerClassName={
+                        props.badgeRatingContainerClassName
+                    }
+                    badgeRatingContainerStyle={
+                        props.badgeRatingContainerStyle
+                    }
+                    badgeRatingClassName={props.badgeRatingClassName}
+                    badgeRatingStyle={props.badgeRatingStyle}
+                    badgeRatingLightClassName={
+                        props.badgeRatingLightClassName
+                    }
+                    badgeRatingLightStyle={
+                        props.badgeRatingLightStyle
+                    }
+                    badgeRatingDarkClassName={
+                        props.badgeRatingDarkClassName
+                    }
+                    badgeRatingDarkStyle={props.badgeRatingDarkStyle}
+                    badgeStarsClassName={props.badgeStarsClassName}
+                    badgeStarsStyle={props.badgeStarsStyle}
+                    badgeStarsContainerClassName={
+                        props.badgeStarsContainerClassName
+                    }
+                    badgeStarsContainerStyle={
+                        props.badgeStarsContainerStyle
+                    }
+                    badgeStarsFilledClassName={
+                        props.badgeStarsFilledClassName
+                    }
+                    badgeStarsFilledStyle={
+                        props.badgeStarsFilledStyle
+                    }
+                    badgeStarsEmptyClassName={
+                        props.badgeStarsEmptyClassName
+                    }
+                    badgeStarsEmptyStyle={props.badgeStarsEmptyStyle}
+                    badgeLinkContainerClassName={
+                        props.badgeLinkContainerClassName
+                    }
+                    badgeLinkContainerStyle={
+                        props.badgeLinkContainerStyle
+                    }
+                    badgeLinkClassName={props.badgeLinkClassName}
+                    badgeLinkStyle={props.badgeLinkStyle}
+                    badgeLinkLightClassName={
+                        props.badgeLinkLightClassName
+                    }
+                    badgeLinkLightStyle={props.badgeLinkLightStyle}
+                    badgeLinkDarkClassName={
+                        props.badgeLinkDarkClassName
+                    }
+                    badgeLinkDarkStyle={props.badgeLinkDarkStyle}
+                    badgeLinkInlineClassName={
+                        props.badgeLinkInlineClassName
+                    }
+                    badgeLinkInlineStyle={props.badgeLinkInlineStyle}
                 />
             )}
 

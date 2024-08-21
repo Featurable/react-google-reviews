@@ -1,7 +1,9 @@
 /** @jsxImportSource @emotion/react */
 
 import { css } from "@emotion/react";
+import clsx from "clsx";
 import React, { FC, useEffect, useMemo, useState } from "react";
+import { ReviewCardCSSProps } from "../../types/cssProps";
 import {
     DateDisplay,
     GoogleReview,
@@ -94,7 +96,7 @@ const footer = css`
     margin-top: 16px;
 `;
 
-export const ReviewCard: FC<{
+type ReviewCardProps = {
     review: GoogleReview;
     maxCharacters?: number;
     nameDisplay?: NameDisplay;
@@ -102,7 +104,9 @@ export const ReviewCard: FC<{
     dateDisplay?: DateDisplay;
     reviewVariant?: ReviewVariant;
     theme?: Theme;
-}> = ({
+};
+
+export const ReviewCard: FC<ReviewCardProps & ReviewCardCSSProps> = ({
     review,
     maxCharacters = 200,
     nameDisplay = "firstAndLastInitials",
@@ -110,6 +114,51 @@ export const ReviewCard: FC<{
     dateDisplay = "relative",
     reviewVariant = "card",
     theme = "light",
+
+    reviewCardClassName,
+    reviewCardStyle,
+    reviewCardLightClassName,
+    reviewCardLightStyle,
+    reviewCardDarkClassName,
+    reviewCardDarkStyle,
+    reviewBodyCardClassName,
+    reviewBodyCardStyle,
+    reviewBodyTestimonialClassName,
+    reviewBodyTestimonialStyle,
+    reviewTextClassName,
+    reviewTextStyle,
+    reviewTextLightClassName,
+    reviewTextLightStyle,
+    reviewTextDarkClassName,
+    reviewTextDarkStyle,
+    reviewReadMoreClassName,
+    reviewReadMoreStyle,
+    reviewReadMoreLightClassName,
+    reviewReadMoreLightStyle,
+    reviewReadMoreDarkClassName,
+    reviewReadMoreDarkStyle,
+    reviewFooterClassName,
+    reviewFooterStyle,
+    reviewerClassName,
+    reviewerStyle,
+    reviewerProfileClassName,
+    reviewerProfileStyle,
+    reviewerProfileImageClassName,
+    reviewerProfileImageStyle,
+    reviewerProfileFallbackClassName,
+    reviewerProfileFallbackStyle,
+    reviewerNameClassName,
+    reviewerNameStyle,
+    reviewerNameLightClassName,
+    reviewerNameLightStyle,
+    reviewerNameDarkClassName,
+    reviewerNameDarkStyle,
+    reviewerDateClassName,
+    reviewerDateStyle,
+    reviewerDateLightClassName,
+    reviewerDateLightStyle,
+    reviewerDateDarkClassName,
+    reviewerDateDarkStyle,
 }) => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -132,6 +181,16 @@ export const ReviewCard: FC<{
                 theme === "light" && reviewCardLight,
                 theme === "dark" && reviewCardDark,
             ]}
+            className={clsx(
+                reviewCardClassName,
+                theme === "light" && reviewCardLightClassName,
+                theme === "dark" && reviewCardDarkClassName
+            )}
+            style={{
+                ...reviewCardStyle,
+                ...(theme === "light" && reviewCardLightStyle),
+                ...(theme === "dark" && reviewCardDarkStyle),
+            }}
         >
             <div>
                 {reviewVariant === "card" && (
@@ -140,6 +199,48 @@ export const ReviewCard: FC<{
                         nameDisplay={nameDisplay}
                         dateDisplay={dateDisplay}
                         theme={theme}
+                        reviewerClassName={reviewerClassName}
+                        reviewerStyle={reviewerStyle}
+                        reviewerProfileClassName={
+                            reviewerProfileClassName
+                        }
+                        reviewerProfileStyle={reviewerProfileStyle}
+                        reviewerProfileImageClassName={
+                            reviewerProfileImageClassName
+                        }
+                        reviewerProfileImageStyle={
+                            reviewerProfileImageStyle
+                        }
+                        reviewerProfileFallbackClassName={
+                            reviewerProfileFallbackClassName
+                        }
+                        reviewerProfileFallbackStyle={
+                            reviewerProfileFallbackStyle
+                        }
+                        reviewerNameClassName={reviewerNameClassName}
+                        reviewerNameStyle={reviewerNameStyle}
+                        reviewerNameLightClassName={
+                            reviewerNameLightClassName
+                        }
+                        reviewerNameLightStyle={
+                            reviewerNameLightStyle
+                        }
+                        reviewerNameDarkClassName={
+                            reviewerNameDarkClassName
+                        }
+                        reviewerNameDarkStyle={reviewerNameDarkStyle}
+                        reviewerDateClassName={reviewerDateClassName}
+                        reviewerDateStyle={reviewerDateStyle}
+                        reviewerDateLightClassName={
+                            reviewerDateLightClassName
+                        }
+                        reviewerDateLightStyle={
+                            reviewerDateLightStyle
+                        }
+                        reviewerDateDarkClassName={
+                            reviewerDateDarkClassName
+                        }
+                        reviewerDateDarkStyle={reviewerDateDarkStyle}
                     />
                 )}
 
@@ -153,6 +254,16 @@ export const ReviewCard: FC<{
                         reviewVariant === "testimonial" &&
                             reviewBodyTestimonial,
                     ]}
+                    className={clsx(
+                        reviewBodyCardClassName,
+                        reviewVariant === "testimonial" &&
+                            reviewBodyTestimonialClassName
+                    )}
+                    style={{
+                        ...reviewBodyCardStyle,
+                        ...(reviewVariant === "testimonial" &&
+                            reviewBodyTestimonialStyle),
+                    }}
                 >
                     <p
                         css={[
@@ -160,6 +271,20 @@ export const ReviewCard: FC<{
                             theme === "light" && reviewTextLight,
                             theme === "dark" && reviewTextDark,
                         ]}
+                        className={clsx(
+                            reviewTextClassName,
+                            theme === "light" &&
+                                reviewTextLightClassName,
+                            theme === "dark" &&
+                                reviewTextDarkClassName
+                        )}
+                        style={{
+                            ...reviewTextStyle,
+                            ...(theme === "light" &&
+                                reviewTextLightStyle),
+                            ...(theme === "dark" &&
+                                reviewTextDarkStyle),
+                        }}
                         data-review-comment
                         data-review-id={review.reviewId}
                     >
@@ -174,6 +299,19 @@ export const ReviewCard: FC<{
                                 theme === "light" && readMoreLight,
                                 theme === "dark" && readMoreDark,
                             ]}
+                            className={clsx(
+                                reviewReadMoreClassName,
+                                theme === "light" &&
+                                    reviewReadMoreLightClassName,
+                                theme === "dark" &&
+                                    reviewReadMoreDarkClassName
+                            )}
+                            style={{
+                                ...reviewReadMoreStyle,
+                                ...(theme === "light"
+                                    ? reviewReadMoreLightStyle
+                                    : reviewReadMoreDarkStyle),
+                            }}
                         >
                             Read {isOpen ? "less" : "more"}
                         </button>
@@ -181,7 +319,11 @@ export const ReviewCard: FC<{
                 </div>
             </div>
 
-            <div css={footer}>
+            <div
+                css={footer}
+                className={reviewFooterClassName}
+                style={reviewFooterStyle}
+            >
                 {reviewVariant === "card" && (
                     <StarRating rating={review.starRating} />
                 )}
@@ -192,6 +334,48 @@ export const ReviewCard: FC<{
                         nameDisplay={nameDisplay}
                         dateDisplay={dateDisplay}
                         theme={theme}
+                        reviewerClassName={reviewerClassName}
+                        reviewerStyle={reviewerStyle}
+                        reviewerProfileClassName={
+                            reviewerProfileClassName
+                        }
+                        reviewerProfileStyle={reviewerProfileStyle}
+                        reviewerProfileImageClassName={
+                            reviewerProfileImageClassName
+                        }
+                        reviewerProfileImageStyle={
+                            reviewerProfileImageStyle
+                        }
+                        reviewerProfileFallbackClassName={
+                            reviewerProfileFallbackClassName
+                        }
+                        reviewerProfileFallbackStyle={
+                            reviewerProfileFallbackStyle
+                        }
+                        reviewerNameClassName={reviewerNameClassName}
+                        reviewerNameStyle={reviewerNameStyle}
+                        reviewerNameLightClassName={
+                            reviewerNameLightClassName
+                        }
+                        reviewerNameLightStyle={
+                            reviewerNameLightStyle
+                        }
+                        reviewerNameDarkClassName={
+                            reviewerNameDarkClassName
+                        }
+                        reviewerNameDarkStyle={reviewerNameDarkStyle}
+                        reviewerDateClassName={reviewerDateClassName}
+                        reviewerDateStyle={reviewerDateStyle}
+                        reviewerDateLightClassName={
+                            reviewerDateLightClassName
+                        }
+                        reviewerDateLightStyle={
+                            reviewerDateLightStyle
+                        }
+                        reviewerDateDarkClassName={
+                            reviewerDateDarkClassName
+                        }
+                        reviewerDateDarkStyle={reviewerDateDarkStyle}
                     />
                 )}
 
@@ -261,12 +445,42 @@ const reviewerDateDark = css`
     color: #9ca3af;
 `;
 
-const ReviewCardReviewer: React.FC<{
+type ReviewCardReviewerProps = {
     review: GoogleReview;
     nameDisplay: NameDisplay;
     dateDisplay: DateDisplay;
     theme?: Theme;
-}> = ({ review, nameDisplay, dateDisplay, theme = "light" }) => {
+};
+
+const ReviewCardReviewer: React.FC<
+    ReviewCardReviewerProps & ReviewCardCSSProps
+> = ({
+    review,
+    nameDisplay,
+    dateDisplay,
+    theme = "light",
+
+    reviewerClassName,
+    reviewerStyle,
+    reviewerProfileClassName,
+    reviewerProfileStyle,
+    reviewerProfileImageClassName,
+    reviewerProfileImageStyle,
+    reviewerProfileFallbackClassName,
+    reviewerProfileFallbackStyle,
+    reviewerNameClassName,
+    reviewerNameStyle,
+    reviewerNameLightClassName,
+    reviewerNameLightStyle,
+    reviewerNameDarkClassName,
+    reviewerNameDarkStyle,
+    reviewerDateClassName,
+    reviewerDateStyle,
+    reviewerDateLightClassName,
+    reviewerDateLightStyle,
+    reviewerDateDarkClassName,
+    reviewerDateDarkStyle,
+}) => {
     const [fallback, setFallback] = useState(false);
 
     useEffect(() => {
@@ -332,8 +546,16 @@ const ReviewCardReviewer: React.FC<{
     };
 
     return (
-        <div css={reviewer}>
-            <div css={reviewerProfile}>
+        <div
+            css={reviewer}
+            className={reviewerClassName}
+            style={reviewerStyle}
+        >
+            <div
+                css={reviewerProfile}
+                className={reviewerProfileClassName}
+                style={reviewerProfileStyle}
+            >
                 <img
                     src={
                         review.reviewer.isAnonymous
@@ -344,17 +566,21 @@ const ReviewCardReviewer: React.FC<{
                         setFallback(true);
                     }}
                     css={reviewerProfileImage}
+                    className={reviewerProfileImageClassName}
+                    style={reviewerProfileImageStyle}
                 />
 
                 {fallback && (
                     <div
                         css={reviewerProfileFallback}
+                        className={reviewerProfileFallbackClassName}
                         style={{
                             backgroundColor: getFallbackBgColor(
                                 review.reviewer.isAnonymous
                                     ? "a"
                                     : review.reviewer.displayName[0].toLowerCase()
                             ),
+                            ...reviewerProfileFallbackStyle,
                         }}
                     >
                         {review.reviewer.isAnonymous
@@ -370,6 +596,19 @@ const ReviewCardReviewer: React.FC<{
                         theme === "light" && reviewerNameLight,
                         theme === "dark" && reviewerNameDark,
                     ]}
+                    className={clsx(
+                        reviewerNameClassName,
+                        theme === "light" &&
+                            reviewerNameLightClassName,
+                        theme === "dark" && reviewerNameDarkClassName
+                    )}
+                    style={{
+                        ...reviewerNameStyle,
+                        ...(theme === "light" &&
+                            reviewerNameLightStyle),
+                        ...(theme === "dark" &&
+                            reviewerNameDarkStyle),
+                    }}
                 >
                     {review.reviewer.isAnonymous
                         ? "Anonymous"
@@ -386,6 +625,20 @@ const ReviewCardReviewer: React.FC<{
                             theme === "light" && reviewerDateLight,
                             theme === "dark" && reviewerDateDark,
                         ]}
+                        className={clsx(
+                            reviewerDateClassName,
+                            theme === "light" &&
+                                reviewerDateLightClassName,
+                            theme === "dark" &&
+                                reviewerDateDarkClassName
+                        )}
+                        style={{
+                            ...reviewerDateStyle,
+                            ...(theme === "light" &&
+                                reviewerDateLightStyle),
+                            ...(theme === "dark" &&
+                                reviewerDateDarkStyle),
+                        }}
                     >
                         {dateDisplay === "absolute"
                             ? new Date(

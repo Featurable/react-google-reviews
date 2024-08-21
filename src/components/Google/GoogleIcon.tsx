@@ -10,12 +10,14 @@ const googleIcon = css`
 
 export const GoogleIcon: React.FC<{
     className?: string;
-}> = ({ className }) => {
+    style?: React.CSSProperties;
+}> = ({ className, style }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             className={className}
+            style={style}
             css={googleIcon}
         >
             <path
