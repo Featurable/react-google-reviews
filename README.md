@@ -168,6 +168,27 @@ There are three layout options currently available:
 }} />
 ```
 
+The `reviews` prop is an array of `GoogleReview` objects with the following structure:
+
+```
+{
+    reviewId: string | null;
+    reviewer: {
+        profilePhotoUrl: string;
+        displayName: string;
+        isAnonymous: boolean;
+    };
+    starRating: number;
+    comment: string;
+    createTime: string | null;
+    updateTime: string | null;
+    reviewReply?: {
+        comment: string;
+        updateTime: string;
+    } | null;
+};
+```
+
 ### CSS Styling
 
 For the carousel widget to work correctly, you must include the CSS file in your project:
