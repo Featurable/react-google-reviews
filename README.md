@@ -127,7 +127,7 @@ export default ReviewsPage;
 ```
 
 > [!NOTE]
-> The Google Places API **only returns the 5 most recent reviews.** If you need more reviews or want to customize which reviews are returned, consider using the free Featurable API.
+> The Google Places API **only returns the 5 most recent reviews.** If you need more reviews or want to customize which reviews are returned, consider using the [free Featurable API](https://featurable.com/).
 
 ## Configuration
 
