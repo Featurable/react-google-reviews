@@ -556,19 +556,18 @@ const ReviewCardReviewer: React.FC<
                 className={reviewerProfileClassName}
                 style={reviewerProfileStyle}
             >
-                <img
-                    src={
-                        review.reviewer.isAnonymous
-                            ? ""
-                            : review.reviewer.profilePhotoUrl
-                    }
-                    onError={() => {
-                        setFallback(true);
-                    }}
-                    css={reviewerProfileImage}
-                    className={reviewerProfileImageClassName}
-                    style={reviewerProfileImageStyle}
-                />
+                {!review.reviewer.isAnonymous &&
+                    review.reviewer.profilePhotoUrl && (
+                        <img
+                            src={review.reviewer.profilePhotoUrl}
+                            onError={() => {
+                                setFallback(true);
+                            }}
+                            css={reviewerProfileImage}
+                            className={reviewerProfileImageClassName}
+                            style={reviewerProfileImageStyle}
+                        />
+                    )}
 
                 {fallback && (
                     <div
