@@ -227,7 +227,7 @@ Please see the documentation for a list of CSS properties and examples of how to
 | Prop | Type | Description |
 | --- | --- | --- |
 | featurableId | string | Featurable widget ID |
-| reviews | GoogleReview[] | Array of reviews to display, fetched using `dangerouslyFetchPlaceReviews` |
+| reviews | [GoogleReview](#googlereview)[] | Array of reviews to display, fetched using `dangerouslyFetchPlaceReviews` |
 | layout | `"badge" \| "carousel" \| "custom"` | Layout of the reviews component |
 | nameDisplay?| `"fullNames" \| "firstAndLastInitials" \| "firstNamesOnly"` | How to display names on reviews |;
 | logoVariant? | `"logo" \| "icon" \| "none"` | How to display the Google logo |
@@ -244,6 +244,19 @@ Please see the documentation for a list of CSS properties and examples of how to
 | disableTranslation? | boolean | Disables translation from Google to use original review text |
 | totalReviewCount? | number | Total number of reviews on Google Business profile. This is automatically fetched if using `featurableId`. Otherwise, this is required if passing reviews manually and `structuredData` is true. |
 | averageRating? | number | Average rating for Google Business profile. This is automatically fetched if using `featurableId`. Otherwise, this is required if passing reviews manually and `structuredData` is true. |
+
+#### `GoogleReview` Model
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| reviewId | `string \| null` | Unique review ID |
+| reviewer | `{ profilePhotoUrl: string; displayName: string; isAnonymous: boolean; }` | Reviewer information |
+| starRating | `number` | Star rating (1-5) |
+| comment | `string` | Review text |
+| createTime | `string \| null` | Review creation time |
+| updateTime | `string \| null` | Review update time |
+| reviewReply? | `{ comment: string; updateTime: string; } \| null` | Review reply information |
+
 
 ### Carousel Props
 
@@ -263,7 +276,7 @@ Please see the documentation for a list of CSS properties and examples of how to
 
 | Prop | Type | Description |
 | --- | --- | --- |
-| renderer? | (reviews: ReactGoogleReview[]) => React.ReactNode | Custom rendering function |
+| renderer? | (reviews: [GoogleReview](#googlereview)[]) => React.ReactNode | Custom rendering function |
 
 ## License
 
