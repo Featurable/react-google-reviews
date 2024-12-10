@@ -240,6 +240,8 @@ Please see the documentation for a list of CSS properties and examples of how to
 | productName? | string | Customize product name for structured data |
 | productDescription? | string | Optional product description for structured data |
 | accessibility? | boolean | Enable/disable accessibility features |
+| hideEmptyReviews? | boolean | Hide reviews without text |
+| disableTranslation? | boolean | Disables translation from Google to use original review text |
 | totalReviewCount? | number | Total number of reviews on Google Business profile. This is automatically fetched if using `featurableId`. Otherwise, this is required if passing reviews manually and `structuredData` is true. |
 | averageRating? | number | Average rating for Google Business profile. This is automatically fetched if using `featurableId`. Otherwise, this is required if passing reviews manually and `structuredData` is true. |
 
