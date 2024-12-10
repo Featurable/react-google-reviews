@@ -226,24 +226,24 @@ Please see the documentation for a list of CSS properties and examples of how to
 
 | Prop | Type | Description |
 | --- | --- | --- |
-| featurableId | string | Featurable widget ID |
+| featurableId | `string` | Featurable widget ID |
 | reviews | [GoogleReview](#googlereview)[] | Array of reviews to display, fetched using `dangerouslyFetchPlaceReviews` |
 | layout | `"badge" \| "carousel" \| "custom"` | Layout of the reviews component |
 | nameDisplay?| `"fullNames" \| "firstAndLastInitials" \| "firstNamesOnly"` | How to display names on reviews |;
 | logoVariant? | `"logo" \| "icon" \| "none"` | How to display the Google logo |
-| maxCharacters? | number | When collapsed, the maximum number of characters to display in the review body |
+| maxCharacters? | `number` | When collapsed, the maximum number of characters to display in the review body |
 | dateDisplay? | `"relative" \| "absolute"` | How to display the review date |
 | reviewVariant? | `"card" \| "testimonial"` | Review layout variations |
 | theme? | `"light" \| "dark"` | Color scheme of the component |
-| structuredData? | boolean | Whether to include JSON-LD structured data for SEO |
-| brandName? | string | Customize business name for structured data |
-| productName? | string | Customize product name for structured data |
-| productDescription? | string | Optional product description for structured data |
-| accessibility? | boolean | Enable/disable accessibility features |
-| hideEmptyReviews? | boolean | Hide reviews without text |
-| disableTranslation? | boolean | Disables translation from Google to use original review text |
-| totalReviewCount? | number | Total number of reviews on Google Business profile. This is automatically fetched if using `featurableId`. Otherwise, this is required if passing reviews manually and `structuredData` is true. |
-| averageRating? | number | Average rating for Google Business profile. This is automatically fetched if using `featurableId`. Otherwise, this is required if passing reviews manually and `structuredData` is true. |
+| structuredData? | `boolean` | Whether to include JSON-LD structured data for SEO |
+| brandName? | `string` | Customize business name for structured data |
+| productName? | `string` | Customize product name for structured data |
+| productDescription? | `string` | Optional product description for structured data |
+| accessibility? | `boolean` | Enable/disable accessibility features |
+| hideEmptyReviews? | `boolean` | Hide reviews without text |
+| disableTranslation? | `boolean` | Disables translation from Google to use original review text |
+| totalReviewCount? | `number` | Total number of reviews on Google Business profile. This is automatically fetched if using `featurableId`. Otherwise, this is required if passing reviews manually and `structuredData` is true. |
+| averageRating? | `number` | Average rating for Google Business profile. This is automatically fetched if using `featurableId`. Otherwise, this is required if passing reviews manually and `structuredData` is true. |
 
 #### `GoogleReview` Model
 
@@ -262,15 +262,15 @@ Please see the documentation for a list of CSS properties and examples of how to
 
 | Prop | Type | Description |
 | --- | --- | --- |
-| carouselSpeed? | number | Autoplay speed of the carousel in milliseconds |
-| carouselAutoplay? | boolean | Whether to autoplay the carousel |
-| maxItems? | number | Maximum number of items to display at any one time in carousel |
+| carouselSpeed? | `number` | Autoplay speed of the carousel in milliseconds |
+| carouselAutoplay? | `boolean` | Whether to autoplay the carousel |
+| maxItems? | `number` | Maximum number of items to display at any one time in carousel |
 
 ### Badge Props
 
 | Prop | Type | Description |
 | --- | --- | --- |
-| profileUrl? | string | Link to Google Business profile, if manually fetching reviews via Place API. Using Featurable API will automatically supply this URL. |
+| profileUrl? | `string` | Link to Google Business profile, if manually fetching reviews via Place API. Using Featurable API will automatically supply this URL. |
 
 ### Custom Layout Props
 
@@ -289,3 +289,7 @@ This library uses [`slick-carousel`](https://github.com/kenwheeler/slick) and [`
 ## Contributing
 
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+## Issues 
+
+Please report any issues or bugs you encounter on the [GitHub Issues](https://github.com/Featurable/react-google-reviews/issues) page.
