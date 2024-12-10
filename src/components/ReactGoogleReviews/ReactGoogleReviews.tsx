@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { css } from "@emotion/react";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "../../css/index.css";
 import {
     BadgeCSSProps,
@@ -239,35 +239,43 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
         throw new Error("averageRating must be between 1 and 5");
     }
 
-    const mapReviews = (review: GoogleReview): GoogleReview => {
-        let comment = review.comment;
-        if (review.comment.includes("(Original)")) {
-            const split = review.comment.split("(Original)");
-            if (split.length > 1) {
-                comment = split[1].trim();
+    const mapReviews = useCallback(
+        (review: GoogleReview): GoogleReview => {
+            let comment = review.comment;
+            if (props.disableTranslation) {
+                if (review.comment.includes("(Original)")) {
+                    const split = review.comment.split("(Original)");
+                    if (split.length > 1) {
+                        comment = split[1].trim();
+                    }
+                } else if (
+                    review.comment.includes("(Translated by Google)")
+                ) {
+                    const split = review.comment.split(
+                        "(Translated by Google)"
+                    );
+                    if (split.length > 1) {
+                        comment = split[0].trim();
+                    }
+                }
             }
-        } else if (
-            review.comment.includes("(Translated by Google)")
-        ) {
-            const split = review.comment.split(
-                "(Translated by Google)"
-            );
-            if (split.length > 1) {
-                comment = split[0].trim();
-            }
-        }
-        return {
-            ...review,
-            comment,
-        };
-    };
+            return {
+                ...review,
+                comment,
+            };
+        },
+        [props.disableTranslation]
+    );
 
-    const filterReviews = (review: GoogleReview): boolean => {
-        if (props.hideEmptyReviews) {
-            return review.comment.trim().length !== 0;
-        }
-        return true;
-    };
+    const filterReviews = useCallback(
+        (review: GoogleReview): boolean => {
+            if (props.hideEmptyReviews) {
+                return review.comment.trim().length !== 0;
+            }
+            return true;
+        },
+        [props.hideEmptyReviews]
+    );
 
     const [reviews, setReviews] = useState<GoogleReview[]>(
         props.reviews?.filter(filterReviews).map(mapReviews) ?? []
@@ -314,7 +322,7 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
         } else {
             setLoading(false);
         }
-    }, [props.featurableId]);
+    }, [props.featurableId, filterReviews, mapReviews]);
 
     if (loading) {
         return (
