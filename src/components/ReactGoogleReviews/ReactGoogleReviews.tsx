@@ -110,6 +110,12 @@ type ReactGoogleReviewsBaseProps = {
      * Enable/disable accessibility features.
      */
     accessibility?: boolean;
+
+    /**
+     * Hide reviews without text
+     * Default: false
+     */
+    hideEmptyReviews?: boolean;
 } & StructuredDataProps;
 
 type ReactGoogleReviewsWithPlaceIdBaseProps =
@@ -227,8 +233,15 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
         throw new Error("averageRating must be between 1 and 5");
     }
 
+    const filterReviews = (review: GoogleReview) => {
+        if (props.hideEmptyReviews) {
+            return review.comment.trim().length !== 0;
+        }
+        return true;
+    };
+
     const [reviews, setReviews] = useState<GoogleReview[]>(
-        props.reviews ?? []
+        props.reviews?.filter(filterReviews) ?? []
     );
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
@@ -256,7 +269,7 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
                         setError(true);
                         return;
                     }
-                    setReviews(data.reviews);
+                    setReviews(data.reviews.filter(filterReviews));
                     setProfileUrl(data.profileUrl);
                     setTotalReviewCount(data.totalReviewCount);
                     setAverageRating(data.averageRating);
@@ -321,6 +334,7 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
     },
     "review": [${reviews
         .filter((r) => !!r.reviewer.isAnonymous)
+        .filter(filterReviews)
         .slice(0, 10)
         .map((review) => {
             return `{
