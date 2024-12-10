@@ -122,6 +122,12 @@ type ReactGoogleReviewsBaseProps = {
      * Default: false
      */
     disableTranslation?: boolean;
+
+    /**
+     * Customize the error message when reviews fail to load.
+     * Default: "Failed to load Google reviews. Please try again later."
+     */
+    errorMessage?: React.ReactNode;
 } & StructuredDataProps;
 
 type ReactGoogleReviewsWithPlaceIdBaseProps =
@@ -344,6 +350,7 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
     ) {
         return (
             <ErrorState
+                errorMessage={props.errorMessage}
                 errorClassName={props.errorClassName}
                 errorStyle={props.errorStyle}
             />

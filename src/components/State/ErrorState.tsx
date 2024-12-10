@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { css } from "@emotion/react";
-import { FC } from "react";
+import React, { FC } from "react";
 import { ErrorStateCSSProps } from "../../types/cssProps";
 
 const error = css`
@@ -14,7 +14,12 @@ const error = css`
         "Segoe UI Emoji", "Segoe UI Symbol";
 `;
 
-export const ErrorState: FC<ErrorStateCSSProps> = ({
+type ErrorStateProps = {
+    errorMessage?: React.ReactNode;
+};
+
+export const ErrorState: FC<ErrorStateProps & ErrorStateCSSProps> = ({
+    errorMessage,
     errorClassName,
     errorStyle,
 }) => {
@@ -24,7 +29,8 @@ export const ErrorState: FC<ErrorStateCSSProps> = ({
             className={errorClassName}
             style={errorStyle}
         >
-            Failed to load Google reviews. Please try again later.
+            {errorMessage ??
+                "Failed to load Google reviews. Please try again later."}
         </div>
     );
 };
