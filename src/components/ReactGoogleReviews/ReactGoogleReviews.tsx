@@ -116,6 +116,12 @@ type ReactGoogleReviewsBaseProps = {
      * Default: false
      */
     hideEmptyReviews?: boolean;
+
+    /**
+     * Disables translation from Google to use original review text
+     * Default: false
+     */
+    disableTranslation?: boolean;
 } & StructuredDataProps;
 
 type ReactGoogleReviewsWithPlaceIdBaseProps =
@@ -233,7 +239,30 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
         throw new Error("averageRating must be between 1 and 5");
     }
 
-    const filterReviews = (review: GoogleReview) => {
+    const mapReviews = (review: GoogleReview): GoogleReview => {
+        let comment = review.comment;
+        if (review.comment.includes("(Original)")) {
+            const split = review.comment.split("(Original)");
+            if (split.length > 1) {
+                comment = split[1].trim();
+            }
+        } else if (
+            review.comment.includes("(Translated by Google)")
+        ) {
+            const split = review.comment.split(
+                "(Translated by Google)"
+            );
+            if (split.length > 1) {
+                comment = split[0].trim();
+            }
+        }
+        return {
+            ...review,
+            comment,
+        };
+    };
+
+    const filterReviews = (review: GoogleReview): boolean => {
         if (props.hideEmptyReviews) {
             return review.comment.trim().length !== 0;
         }
@@ -241,7 +270,7 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
     };
 
     const [reviews, setReviews] = useState<GoogleReview[]>(
-        props.reviews?.filter(filterReviews) ?? []
+        props.reviews?.filter(filterReviews).map(mapReviews) ?? []
     );
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
@@ -269,7 +298,11 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
                         setError(true);
                         return;
                     }
-                    setReviews(data.reviews.filter(filterReviews));
+                    setReviews(
+                        data.reviews
+                            .filter(filterReviews)
+                            .map(mapReviews)
+                    );
                     setProfileUrl(data.profileUrl);
                     setTotalReviewCount(data.totalReviewCount);
                     setAverageRating(data.averageRating);
@@ -335,6 +368,7 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
     "review": [${reviews
         .filter((r) => !!r.reviewer.isAnonymous)
         .filter(filterReviews)
+        .map(mapReviews)
         .slice(0, 10)
         .map((review) => {
             return `{
