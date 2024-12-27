@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { css, keyframes } from "@emotion/react";
-import { FC } from "react";
+import React, { FC } from "react";
 import { LoadingStateCSSProps } from "../../types/cssProps";
 
 const loader = css`
@@ -38,7 +38,7 @@ const loaderLabel = css`
 `;
 
 type LoadingStateProps = {
-    loadingMessage?: string;
+    loadingMessage?: React.ReactNode;
 };
 
 export const LoadingState: FC<

@@ -128,6 +128,12 @@ type ReactGoogleReviewsBaseProps = {
      * Default: "Failed to load Google reviews. Please try again later."
      */
     errorMessage?: React.ReactNode;
+
+    /**
+     * Customize the loading message when reviews are loading.
+     * Default: "Loading reviews..."
+     */
+    loadingMessage?: React.ReactNode;
 } & StructuredDataProps;
 
 type ReactGoogleReviewsWithPlaceIdBaseProps =
@@ -371,6 +377,7 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
     if (loading) {
         return (
             <LoadingState
+                loadingMessage={props.loadingMessage}
                 loaderClassName={props.loaderClassName}
                 loaderStyle={props.loaderStyle}
                 loaderSpinnerClassName={props.loaderSpinnerClassName}
