@@ -93,6 +93,8 @@ type CarouselProps = {
     maxItems?: number;
     theme?: Theme;
     accessibility?: boolean;
+    readMoreLabel?: string;
+    readLessLabel?: string;
 };
 
 export const Carousel: FC<
@@ -109,6 +111,8 @@ export const Carousel: FC<
     maxItems = 3,
     theme = "light",
     accessibility = true,
+    readMoreLabel,
+    readLessLabel,
 
     carouselClassName,
     carouselStyle,
@@ -343,6 +347,8 @@ export const Carousel: FC<
                                 dateDisplay={dateDisplay}
                                 reviewVariant={reviewVariant}
                                 theme={theme}
+                                readMoreLabel={readMoreLabel}
+                                readLessLabel={readLessLabel}
                                 reviewCardClassName={
                                     reviewCardClassName
                                 }

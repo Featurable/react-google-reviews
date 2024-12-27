@@ -195,6 +195,18 @@ type ReactGoogleReviewsCarouselProps =
          * Default: 3
          */
         maxItems?: number;
+
+        /**
+         * Read more label for truncated reviews.
+         * Default: "Read more"
+         */
+        readMoreLabel?: string;
+
+        /**
+         * Read less label for expanded reviews.
+         * Default: "Read less"
+         */
+        readLessLabel?: string;
     } & CarouselCSSProps &
         ReviewCardCSSProps;
 
@@ -207,6 +219,20 @@ type ReactGoogleReviewsBadgeProps =
          * This is automatically fetched when passing `featurableId`.
          */
         profileUrl?: string;
+
+        /**
+         * Label for the badge.
+         * Default: "Google Rating"
+         */
+        badgeLabel?: string;
+
+        /**
+         * Function to format the badge subheading.
+         * Default: (totalReviewCount) => `Read our ${totalReviewCount} reviews`
+         */
+        badgeSubheadingFormatter?: (
+            totalReviewCount: number
+        ) => string;
     } & BadgeCSSProps;
 
 type ReactGoogleReviewsCustomProps =
@@ -411,6 +437,8 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
                     carouselAutoplay={props.carouselAutoplay}
                     maxItems={props.maxItems}
                     theme={props.theme}
+                    readMoreLabel={props.readMoreLabel}
+                    readLessLabel={props.readLessLabel}
                     accessibility={props.accessibility}
                     carouselClassName={props.carouselClassName}
                     carouselStyle={props.carouselStyle}
@@ -553,6 +581,10 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
                     totalReviewCount={totalReviewCount!}
                     profileUrl={profileUrl}
                     theme={props.theme}
+                    badgeLabel={props.badgeLabel}
+                    badgeSubheadingFormatter={
+                        props.badgeSubheadingFormatter
+                    }
                     badgeClassName={props.badgeClassName}
                     badgeStyle={props.badgeStyle}
                     badgeContainerClassName={

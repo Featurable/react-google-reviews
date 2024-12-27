@@ -132,6 +132,8 @@ type BadgeProps = {
     totalReviewCount: number;
     profileUrl?: string | null;
     theme?: Theme;
+    badgeLabel?: string;
+    badgeSubheadingFormatter?: (totalReviewCount: number) => string;
 };
 
 export const Badge: FC<BadgeProps & BadgeCSSProps> = ({
@@ -139,6 +141,9 @@ export const Badge: FC<BadgeProps & BadgeCSSProps> = ({
     totalReviewCount,
     profileUrl,
     theme = "light",
+    badgeLabel = "Google Rating",
+    badgeSubheadingFormatter = (totalReviewCount) =>
+        `Read our ${totalReviewCount} reviews`,
     badgeClassName,
     badgeStyle,
     badgeContainerClassName,
@@ -245,7 +250,7 @@ export const Badge: FC<BadgeProps & BadgeCSSProps> = ({
                                 : badgeLabelDarkStyle),
                         }}
                     >
-                        Google Rating
+                        {badgeLabel}
                     </span>
                     <div
                         css={badgeRatingContainer}
@@ -342,7 +347,9 @@ export const Badge: FC<BadgeProps & BadgeCSSProps> = ({
                                     ...badgeLinkInlineStyle,
                                 }}
                             >
-                                Read our {totalReviewCount} reviews
+                                {badgeSubheadingFormatter(
+                                    totalReviewCount
+                                )}
                             </a>
                         ) : (
                             <span
@@ -368,7 +375,9 @@ export const Badge: FC<BadgeProps & BadgeCSSProps> = ({
                                         : badgeLinkDarkStyle),
                                 }}
                             >
-                                Read our {totalReviewCount} reviews
+                                {badgeSubheadingFormatter(
+                                    totalReviewCount
+                                )}
                             </span>
                         )}
                     </div>

@@ -104,6 +104,8 @@ type ReviewCardProps = {
     dateDisplay?: DateDisplay;
     reviewVariant?: ReviewVariant;
     theme?: Theme;
+    readMoreLabel?: string;
+    readLessLabel?: string;
 };
 
 export const ReviewCard: FC<ReviewCardProps & ReviewCardCSSProps> = ({
@@ -114,6 +116,8 @@ export const ReviewCard: FC<ReviewCardProps & ReviewCardCSSProps> = ({
     dateDisplay = "relative",
     reviewVariant = "card",
     theme = "light",
+    readMoreLabel = "Read more",
+    readLessLabel = "Read less",
 
     reviewCardClassName,
     reviewCardStyle,
@@ -313,7 +317,7 @@ export const ReviewCard: FC<ReviewCardProps & ReviewCardCSSProps> = ({
                                     : reviewReadMoreDarkStyle),
                             }}
                         >
-                            Read {isOpen ? "less" : "more"}
+                            {isOpen ? readLessLabel : readMoreLabel}
                         </button>
                     )}
                 </div>
