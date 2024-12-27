@@ -13,7 +13,7 @@ import {
     Theme,
 } from "../../types/review";
 import { displayName } from "../../utils/displayName";
-import { getRelativeDate } from "../../utils/getRelativeDate";
+import { getRelativeDate as defaultGetRelativeDate } from "../../utils/getRelativeDate";
 import { trim } from "../../utils/trim";
 import { GoogleIcon } from "../Google/GoogleIcon";
 import { GoogleLogo } from "../Google/GoogleLogo";
@@ -106,6 +106,8 @@ type ReviewCardProps = {
     theme?: Theme;
     readMoreLabel?: string;
     readLessLabel?: string;
+    getAbsoluteDate?: (date: Date) => string;
+    getRelativeDate?: (date: Date) => string;
 };
 
 export const ReviewCard: FC<ReviewCardProps & ReviewCardCSSProps> = ({
@@ -118,7 +120,8 @@ export const ReviewCard: FC<ReviewCardProps & ReviewCardCSSProps> = ({
     theme = "light",
     readMoreLabel = "Read more",
     readLessLabel = "Read less",
-
+    getAbsoluteDate,
+    getRelativeDate,
     reviewCardClassName,
     reviewCardStyle,
     reviewCardLightClassName,
@@ -454,6 +457,8 @@ type ReviewCardReviewerProps = {
     nameDisplay: NameDisplay;
     dateDisplay: DateDisplay;
     theme?: Theme;
+    getAbsoluteDate?: (date: Date) => string;
+    getRelativeDate?: (date: Date) => string;
 };
 
 const ReviewCardReviewer: React.FC<
@@ -463,6 +468,13 @@ const ReviewCardReviewer: React.FC<
     nameDisplay,
     dateDisplay,
     theme = "light",
+    getAbsoluteDate = (date) =>
+        date.toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+        }),
+    getRelativeDate = defaultGetRelativeDate,
 
     reviewerClassName,
     reviewerStyle,
@@ -644,15 +656,13 @@ const ReviewCardReviewer: React.FC<
                         }}
                     >
                         {dateDisplay === "absolute"
-                            ? new Date(
-                                  review.updateTime ??
-                                      review.createTime ??
-                                      ""
-                              ).toLocaleDateString(undefined, {
-                                  year: "numeric",
-                                  month: "long",
-                                  day: "numeric",
-                              })
+                            ? getAbsoluteDate(
+                                  new Date(
+                                      review.updateTime ??
+                                          review.createTime ??
+                                          ""
+                                  )
+                              )
                             : getRelativeDate(
                                   new Date(
                                       review.updateTime ??

@@ -207,6 +207,18 @@ type ReactGoogleReviewsCarouselProps =
          * Default: "Read less"
          */
         readLessLabel?: string;
+
+        /**
+         * Formatting function for relative dates.
+         * Default: defaultGetRelativeDate
+         */
+        getRelativeDate?: (date: Date) => string;
+
+        /**
+         * Formatting function for absolute dates.
+         * Default: (date) => date.toLocaleDateString()
+         */
+        getAbsoluteDate?: (date: Date) => string;
     } & CarouselCSSProps &
         ReviewCardCSSProps;
 
@@ -439,6 +451,8 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
                     theme={props.theme}
                     readMoreLabel={props.readMoreLabel}
                     readLessLabel={props.readLessLabel}
+                    getRelativeDate={props.getRelativeDate}
+                    getAbsoluteDate={props.getAbsoluteDate}
                     accessibility={props.accessibility}
                     carouselClassName={props.carouselClassName}
                     carouselStyle={props.carouselStyle}

@@ -95,6 +95,8 @@ type CarouselProps = {
     accessibility?: boolean;
     readMoreLabel?: string;
     readLessLabel?: string;
+    getAbsoluteDate?: (date: Date) => string;
+    getRelativeDate?: (date: Date) => string;
 };
 
 export const Carousel: FC<
@@ -113,6 +115,8 @@ export const Carousel: FC<
     accessibility = true,
     readMoreLabel,
     readLessLabel,
+    getAbsoluteDate,
+    getRelativeDate,
 
     carouselClassName,
     carouselStyle,
@@ -349,6 +353,8 @@ export const Carousel: FC<
                                 theme={theme}
                                 readMoreLabel={readMoreLabel}
                                 readLessLabel={readLessLabel}
+                                getRelativeDate={getRelativeDate}
+                                getAbsoluteDate={getAbsoluteDate}
                                 reviewCardClassName={
                                     reviewCardClassName
                                 }
