@@ -266,12 +266,18 @@ Please see the documentation for a list of CSS properties and examples of how to
 | carouselSpeed? | `number` | Autoplay speed of the carousel in milliseconds |
 | carouselAutoplay? | `boolean` | Whether to autoplay the carousel |
 | maxItems? | `number` | Maximum number of items to display at any one time in carousel |
+| readMoreLabel? | `string` | Read more label for truncated reviews. |
+| readLessLabel? | `string` | Read less label for expanded reviews. |
+| getRelativeDate? | `(date: Date) => string` | Formatting function for relative dates. |
+| getAbsoluteDate? | `(date: Date) => string` | Formatting function for absolute dates. |
 
 ### Badge Props
 
 | Prop | Type | Description |
 | --- | --- | --- |
 | profileUrl? | `string` | Link to Google Business profile, if manually fetching reviews via Place API. Using Featurable API will automatically supply this URL. |
+| badgeLabel? | `string` | Label for the badge. |
+| badgeSubheadingFormatter? | `(totalReviewCount: number) => string` | Function to format the badge subheading. |
 
 ### Custom Layout Props
 
