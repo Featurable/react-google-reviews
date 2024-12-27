@@ -37,7 +37,14 @@ const loaderLabel = css`
     font-weight: 600;
 `;
 
-export const LoadingState: FC<LoadingStateCSSProps> = ({
+type LoadingStateProps = {
+    loadingMessage?: string;
+};
+
+export const LoadingState: FC<
+    LoadingStateProps & LoadingStateCSSProps
+> = ({
+    loadingMessage,
     loaderClassName,
     loaderStyle,
     loaderSpinnerClassName,
@@ -76,7 +83,7 @@ export const LoadingState: FC<LoadingStateCSSProps> = ({
                 className={loaderLabelClassName}
                 style={loaderLabelStyle}
             >
-                Loading reviews...
+                {loadingMessage ?? "Loading reviews..."}
             </p>
         </div>
     );
