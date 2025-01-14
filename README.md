@@ -271,6 +271,7 @@ Please see the documentation for a list of CSS properties and examples of how to
 | readLessLabel? | `string` | Read less label for expanded reviews. |
 | getRelativeDate? | `(date: Date) => string` | Formatting function for relative dates. |
 | getAbsoluteDate? | `(date: Date) => string` | Formatting function for absolute dates. |
+| showDots? | `boolean` | Whether to show/hide navigation dots in the carousel |
 
 ### Badge Props
 

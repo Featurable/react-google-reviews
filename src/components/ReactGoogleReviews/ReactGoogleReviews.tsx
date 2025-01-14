@@ -225,6 +225,12 @@ type ReactGoogleReviewsCarouselProps =
          * Default: (date) => date.toLocaleDateString()
          */
         getAbsoluteDate?: (date: Date) => string;
+
+        /**
+         * Show/hide navigation dots on the carousel
+         * Default: true
+         */
+        showDots?: boolean;
     } & CarouselCSSProps &
         ReviewCardCSSProps;
 
@@ -460,6 +466,7 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
                     readLessLabel={props.readLessLabel}
                     getRelativeDate={props.getRelativeDate}
                     getAbsoluteDate={props.getAbsoluteDate}
+                    showDots={props.showDots}
                     accessibility={props.accessibility}
                     carouselClassName={props.carouselClassName}
                     carouselStyle={props.carouselStyle}

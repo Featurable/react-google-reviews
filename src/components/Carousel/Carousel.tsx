@@ -97,6 +97,7 @@ type CarouselProps = {
     readLessLabel?: string;
     getAbsoluteDate?: (date: Date) => string;
     getRelativeDate?: (date: Date) => string;
+    showDots?: boolean;
 };
 
 export const Carousel: FC<
@@ -117,6 +118,7 @@ export const Carousel: FC<
     readLessLabel,
     getAbsoluteDate,
     getRelativeDate,
+    showDots = true,
 
     carouselClassName,
     carouselStyle,
@@ -286,7 +288,7 @@ export const Carousel: FC<
             </button>
             <Slider
                 key={`${autoplay}-${speed}`}
-                dots={true}
+                dots={showDots}
                 infinite={true}
                 speed={500}
                 slidesToShow={maxItems}
@@ -313,7 +315,7 @@ export const Carousel: FC<
                             slidesToShow: maxItems,
                             slidesToScroll: autoplay ? 1 : maxItems,
                             infinite: true,
-                            dots: true,
+                            dots: showDots,
                         },
                     },
                     {
