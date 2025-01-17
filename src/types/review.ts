@@ -15,6 +15,9 @@ export type GoogleReview = {
     } | null;
 };
 
+// Force type into value space to avoid type-only export incompatibility
+export const GoogleReview = {};
+
 export type NameDisplay =
     | "fullNames"
     | "firstAndLastInitials"
@@ -50,3 +53,6 @@ interface FeaturableAPIResponseError
 export type FeaturableAPIResponse =
     | FeaturableAPIResponseSuccess
     | FeaturableAPIResponseError;
+
+// Force type into value space to avoid type-only export incompatibility
+export const FeaturableAPIResponse = {} as const;
