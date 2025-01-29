@@ -144,6 +144,11 @@ type ReactGoogleReviewsWithPlaceIdBaseProps =
          */
         reviews: GoogleReview[];
         featurableId?: never;
+
+        /**
+         * Controls the loading state of the component when fetching reviews manually.
+         */
+        isLoading?: boolean;
     };
 
 type ReactGoogleReviewsWithPlaceIdWithStructuredDataProps = {
@@ -170,6 +175,8 @@ type ReactGoogleReviewsWithFeaturableIdProps =
          * https://featurable.com/app/widgets
          */
         featurableId: string;
+
+        isLoading?: never;
     };
 
 type ReactGoogleReviewsBasePropsWithRequired =
@@ -380,7 +387,10 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
         }
     }, [props.featurableId, filterReviews, mapReviews]);
 
-    if (loading) {
+    if (
+        (loading && typeof props.isLoading === "undefined") ||
+        props.isLoading
+    ) {
         return (
             <LoadingState
                 loadingMessage={props.loadingMessage}
@@ -452,6 +462,7 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
 
             {props.layout === "carousel" && (
                 <Carousel
+                    key={reviews.length}
                     reviews={reviews}
                     maxCharacters={props.maxCharacters}
                     nameDisplay={props.nameDisplay}
