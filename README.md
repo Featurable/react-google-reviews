@@ -246,6 +246,7 @@ Please see the documentation for a list of CSS properties and examples of how to
 | averageRating? | `number` | Average rating for Google Business profile. This is automatically fetched if using `featurableId`. Otherwise, this is required if passing reviews manually and `structuredData` is true. |
 | errorMessage? | `React.ReactNode` | Custom error message to display if reviews cannot be fetched |
 | loadingMessage? | `React.ReactNode` | Custom loading message to display while reviews are loading |
+| isLoading? | `boolean` | Controls the loading state of the component when fetching reviews manually |
 
 #### `GoogleReview` Model
 
