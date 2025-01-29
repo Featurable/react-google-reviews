@@ -356,6 +356,15 @@ const ReactGoogleReviews: React.FC<ReactGoogleReviewsProps> = ({
     );
 
     useEffect(() => {
+        // update reviews when props change
+        if (props.reviews) {
+            setReviews(
+                props.reviews.filter(filterReviews).map(mapReviews)
+            );
+        }
+    }, [props.reviews, filterReviews, mapReviews]);
+
+    useEffect(() => {
         if (props.featurableId) {
             fetch(
                 `https://featurable.com/api/v1/widgets/${props.featurableId}`,

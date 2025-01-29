@@ -1,6 +1,6 @@
 {
   "name": "react-google-reviews",
-  "version": "1.7.3",
+  "version": "1.7.4",
   "description": "A React component to easily display Google reviews using Google Places API or Google My Business API.",
   "scripts": {
     "start": "webpack serve --config webpack.config.js",
