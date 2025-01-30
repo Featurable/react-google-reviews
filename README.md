@@ -300,6 +300,8 @@ This library uses [`slick-carousel`](https://github.com/kenwheeler/slick) and [`
 
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
+Please see the [Contributing Guidelines](https://github.com/Featurable/react-google-reviews/blob/main/CONTRIBUTING.md) for details on how to contribute.
+
 ## Issues 
 
 Please report any issues or bugs you encounter on the [GitHub Issues](https://github.com/Featurable/react-google-reviews/issues) page.
