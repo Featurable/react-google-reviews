@@ -192,6 +192,22 @@ export const Carousel: FC<
         return carouselSpeed == null ? 3000 : carouselSpeed;
     }, [carouselSpeed]);
 
+    function extendArray<T>(array: T[], targetLength: number): T[] {
+        if (array.length === 0) {
+            return [];
+        }
+
+        const result: T[] = [...array];
+
+        while (result.length < targetLength) {
+            const remaining = targetLength - result.length;
+            const itemsToCopy = Math.min(result.length, remaining);
+            result.push(...result.slice(0, itemsToCopy));
+        }
+
+        return result;
+    }
+
     return (
         <div
             css={carousel}
@@ -291,8 +307,18 @@ export const Carousel: FC<
                 dots={showDots}
                 infinite={true}
                 speed={500}
-                slidesToShow={maxItems}
-                slidesToScroll={autoplay ? 1 : maxItems}
+                slidesToShow={
+                    reviews.length < maxItems
+                        ? reviews.length
+                        : maxItems
+                }
+                slidesToScroll={
+                    autoplay
+                        ? 1
+                        : reviews.length < maxItems
+                        ? reviews.length
+                        : maxItems
+                }
                 className=""
                 ref={slider}
                 autoplay={autoplay}
@@ -312,8 +338,15 @@ export const Carousel: FC<
                     {
                         breakpoint: 1280,
                         settings: {
-                            slidesToShow: maxItems,
-                            slidesToScroll: autoplay ? 1 : maxItems,
+                            slidesToShow:
+                                reviews.length < maxItems
+                                    ? reviews.length
+                                    : maxItems,
+                            slidesToScroll: autoplay
+                                ? 1
+                                : reviews.length < maxItems
+                                ? reviews.length
+                                : maxItems,
                             infinite: true,
                             dots: showDots,
                         },
@@ -321,9 +354,16 @@ export const Carousel: FC<
                     {
                         breakpoint: 768,
                         settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: autoplay ? 1 : 2,
-                            initialSlide: 2,
+                            slidesToShow:
+                                reviews.length < 2
+                                    ? reviews.length
+                                    : 2,
+                            slidesToScroll: autoplay
+                                ? 1
+                                : reviews.length < 2
+                                ? reviews.length
+                                : 2,
+                            initialSlide: reviews.length < 2 ? 1 : 2,
                         },
                     },
                     {
@@ -335,11 +375,16 @@ export const Carousel: FC<
                     },
                 ]}
             >
-                {reviews.map((review, index) => {
+                {(reviews.length < maxItems
+                    ? extendArray(reviews, maxItems)
+                    : reviews
+                ).map((review, index) => {
                     return (
                         <div
                             css={carouselCard}
-                            key={review.reviewId ?? review.comment}
+                            key={`${index}-${
+                                review.reviewId ?? review.comment
+                            }`}
                             tabIndex={index === 0 ? 0 : -1}
                             aria-label={`Review ${index + 1}`}
                             className={carouselCardClassName}

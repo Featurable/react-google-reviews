@@ -50,14 +50,14 @@ Check out the [live demo](https://featurable.com/docs/react-google-reviews#live-
 
 ## Features
 
-1. **Customizable**: Choose from three layout options and customize the appearance of the reviews component
-2. **SEO-friendly**: Include JSON-LD structured data for search engines to index your reviews
-3. **Responsive**: Works on all devices and screen sizes
-4. **Fast**: Caches reviews for quick loading and improved performance
-5. **Free**: No cost to use the Featurable API for fetching reviews
-6. **Fresh**: Automatically updates with new reviews from Google every 48 hours (using Featurable API)
-7. **Accessible**: Built with accessibility in mind (WAI-ARIA compliant)
-8. **Lightweight**: Small bundle size and minimal dependencies
+1. 🛠️ **Customizable**: Choose from three layout options and customize the appearance of the reviews component
+2. 🔎 **SEO-friendly**: Include JSON-LD structured data for search engines to index your reviews
+3. 💻 **Responsive**: Works on all devices and screen sizes
+4. ⚡ **Fast**: Caches reviews for quick loading and improved performance
+5. ✨ **Free**: No cost to use the Featurable API for fetching reviews
+6. 🌱 **Fresh**: Automatically updates with new reviews from Google every 48 hours (using Featurable API)
+7. ♿️ **Accessible**: Built with accessibility in mind (WAI-ARIA compliant)
+8. 🪶 **Lightweight**: Small bundle size and minimal dependencies
 
 ## Installation
 
