@@ -63,11 +63,15 @@ Check out the [live demo](https://featurable.com/docs/react-google-reviews#live-
 
 Install it from npm, yarn, or pnpm:
 
-```
+```sh
 npm install react-google-reviews
+```
 
+```sh
 yarn add react-google-reviews
+```
 
+```sh
 pnpm add react-google-reviews
 ```
 
