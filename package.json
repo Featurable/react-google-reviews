@@ -4,6 +4,7 @@
   "description": "A React component to easily display Google reviews using Google Places API or Google My Business API.",
   "scripts": {
     "start": "webpack serve --config webpack.config.js",
+    "dev": "rollup -c rollup.config.dev.js -w --bundleConfigAsCjs",
     "build": "rollup -c --bundleConfigAsCjs"
   },
   "keywords": [
