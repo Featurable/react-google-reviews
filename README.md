@@ -61,18 +61,24 @@ Check out the [live demo](https://featurable.com/docs/react-google-reviews#live-
 
 ## Installation
 
-Install it from npm:
+Install it from npm, yarn, or pnpm:
 
 ```
 npm install react-google-reviews
+
+yarn add react-google-reviews
+
+pnpm add react-google-reviews
 ```
 
 ## Usage
 
+The `<ReactGoogleReviews>` component renders Google reviews. You can supply Google reviews to the component automatically using the Featurable API or by manually fetching and passing reviews.
+
 ### Using the Featurable API (recommended)
 
 Prerequisites:
-1. Create a free Featurable account at [https://featurable.com](https://featurable.com)
+1. Create a free Featurable account at [https://featurable.com](https://featurable.com?ref=react-google-reviews)
 2. Create a new Featurable widget
 3. Click Embed > API and copy the widget ID
 
@@ -168,7 +174,7 @@ There are three layout options currently available:
 }} />
 ```
 
-The `reviews` prop is an array of `GoogleReview` objects with the following structure:
+The `reviews` prop is an array of `ReactGoogleReview` objects with the following structure:
 
 ```
 {
@@ -248,7 +254,7 @@ Please see the documentation for a list of CSS properties and examples of how to
 | loadingMessage? | `React.ReactNode` | Custom loading message to display while reviews are loading |
 | isLoading? | `boolean` | Controls the loading state of the component when fetching reviews manually |
 
-#### `GoogleReview` Model
+#### `ReactGoogleReview` Model
 
 | Prop | Type | Description |
 | --- | --- | --- |
@@ -286,7 +292,7 @@ Please see the documentation for a list of CSS properties and examples of how to
 
 | Prop | Type | Description |
 | --- | --- | --- |
-| renderer? | (reviews: [GoogleReview](#googlereview)[]) => React.ReactNode | Custom rendering function |
+| renderer? | (reviews: [ReactGoogleReview](#reactgooglereview-model)[]) => React.ReactNode | Custom rendering function |
 
 ## License
 
@@ -294,7 +300,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgements
 
-This library uses [`slick-carousel`](https://github.com/kenwheeler/slick) and [`react-slick`](https://github.com/akiran/react-slick) for the carousel layout.
+This library uses [`slick-carousel`](https://github.com/kenwheeler/slick) and [`react-slick`](https://github.com/akiran/react-slick) under the MIT license for the carousel layout. You can find the respective licenses [here](https://github.com/kenwheeler/slick?tab=MIT-1-ov-file#readme) and [here](https://github.com/akiran/react-slick?tab=MIT-1-ov-file#readme), respectively.
 
 ## Contributing
 
@@ -305,3 +311,5 @@ Please see the [Contributing Guidelines](https://github.com/Featurable/react-goo
 ## Issues 
 
 Please report any issues or bugs you encounter on the [GitHub Issues](https://github.com/Featurable/react-google-reviews/issues) page.
+
+For support using Featurable, please contact us through your [Featurable dashboard](https://featurable.com/app).
