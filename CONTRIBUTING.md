@@ -23,6 +23,14 @@ Ensure you have Node.js (LTS recommended) and install dependencies:
 npm install
 ```
 
+### 3. Start Development Environment
+
+Start the development environment by running:
+
+```sh
+npm run dev
+```
+
 ## How to Contribute
 
 ###  1. Find an Issue
